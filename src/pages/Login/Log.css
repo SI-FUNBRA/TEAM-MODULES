@@ -1,0 +1,14 @@
+.imgFondo1 {
+    position: absolute;
+    bottom: 4rem;
+    left: 5rem;
+}
+
+.imgFondo2 {
+    position: absolute;
+    bottom: 4rem;
+    right: 5rem;
+}
+
+@media (max-width: 900px) {
+}
