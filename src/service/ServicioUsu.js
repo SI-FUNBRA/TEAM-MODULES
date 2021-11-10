@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 const URL = `${process.env.REACT_APP_API_URL}/usuarios`
 
 export class ServicioUsu {
@@ -10,6 +11,12 @@ export class ServicioUsu {
 
     getUsuariosInactivos(){
         return axios.get(`${URL}/inactivos`)
+    }
+
+    getUsertopbar(){
+        axios.defaults.headers.common['token'] = localStorage.getItem('token')
+
+        return axios.get(`${URL}/usertopbar`)
     }
 
     createUsuario(data){

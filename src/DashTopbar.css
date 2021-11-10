@@ -1,0 +1,29 @@
+.layout-topbar .p-button {
+    margin-right: 0.5rem;
+}
+.layout-topbar .p-buttonset .p-button {
+    margin-right: 0;
+}
+.layout-topbar .perfil i {
+    line-height: 2.25rem;
+}
+.layout-topbar .perfil {
+    background: linear-gradient(to left, rgba(76, 156, 217, 0.5) 50%, rgba(76, 156, 217, 0.8) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: background-position 0.5s ease-out;
+    color: #fff;
+    border-color: rgba(76, 156, 217, 0.8);
+    border-radius: 20px;
+}
+.layout-topbar .perfil:hover {
+    background-position: left bottom;
+}
+.layout-topbar .perfil i {
+    background-color: rgba(76, 156, 217, 0.8);
+    border-radius: 50px;
+}
+.layout-topbar .perfil:focus {
+    box-shadow: 0 0 0 1px rgba(76, 156, 217, 0.3);
+    background-color: rgba(76, 156, 217, 0.8);
+}

@@ -2,12 +2,14 @@
     position: absolute;
     bottom: 4rem;
     left: 5rem;
+    filter: invert(20%);
 }
 
 .imgFondo2 {
     position: absolute;
     bottom: 4rem;
     right: 5rem;
+    filter: invert(90%);
 }
 
 @media (max-width: 900px) {

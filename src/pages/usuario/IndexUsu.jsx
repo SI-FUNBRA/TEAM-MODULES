@@ -11,36 +11,42 @@ import { Calendar } from 'primereact/calendar';
 import { Card } from 'primereact/card';
 import { ServicioUsu } from '../../service/ServicioUsu';
 import SelectTipoDocumento from '../../components/tipoDoc/SelectTipoDocumento';
-import SelectBarrio from '../../components/selectCiudad/SelectCiudad';
 import { Dropdown } from 'primereact/dropdown';
-import { FormValidations } from '../../validations/formValidations';
 import SelectCiudad from '../../components/selectCiudad/SelectCiudad';
+import { useFormik } from 'formik';
 
+import { RiUserReceivedFill,RiUserSharedFill } from "react-icons/ri";
+import { AiOutlineUserAdd } from "react-icons/ai";
+import { FaUserAlt, FaRegCalendarAlt, FaAddressCard } from "react-icons/fa";
+import { BsFillTelephoneFill } from "react-icons/bs";
+import { MdEmail, MdOutlinePhoneAndroid, MdMarkEmailRead } from "react-icons/md";
 const IndexUsu = () => {
     let today = new Date()
 
     let emptyUsuario = {
-        idUsuario: null,
-        nombreUsuario: '',
-        apellidoUsuario: '',
-        correoUsuario: '',
-        telefonoFijo: '',
-        telefonoCelular: '',
-        fechaNacimientoUsuario:'',
-        idTipoDocumento_FK:'',
-        numeroDocumento:'',
-        fechaExpedicionDoc:'',
-        LugarExpedicionDoc:'',
-        idCiudad_FK:'',
-        TipoDocumento:{
-            nombreTipoDoc:''
-        },
-        Ciudad:{
-            nombreCiudad:''
-        },
-        LugarExpedicionDocu:{
-            nombreCiudad:''
-        }
+        idUsuario: "",
+            nombreUsuario: '',
+            apellidoUsuario: '',
+            correoUsuario: '',
+            correoUsuario2: '',
+            telefonoFijo: '',
+            telefonoCelular: '',
+            fechaNacimientoUsuario:'',
+            idTipoDocumento_FK:'',
+            numeroDocumento:'',
+            fechaExpedicionDoc:'',
+            LugarExpedicionDoc:'',
+            idCiudad_FK:'',
+            TipoDocumento:{
+                nombreTipoDoc:''
+            },
+            Ciudad:{
+                nombreCiudad:''
+            },
+            LugarExpedicionDocu:{
+                nombreCiudad:''
+            }
+
     };
 
     const [usuarios, setUsuarios] = useState(null);
@@ -49,8 +55,6 @@ const IndexUsu = () => {
     const [changeStateDialog, setchangeStateDialog] = useState(false);
     //editar o mostrar uno nomas
     const [usuario, setUsuario] = useState(emptyUsuario);
-    const [selectedProducts, setSelectedProducts] = useState(null);
-    const [submitted, setSubmitted] = useState(false);
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
     const dt = useRef(null);
@@ -94,13 +98,12 @@ const IndexUsu = () => {
     const openNew = () => {
         //Aqui le establece el valor vacio por defecto
         setUsuario(emptyUsuario);
-        setSubmitted(false);
+        formik.setValues(emptyUsuario)
         setUpdateDialog(true);
     }
 
     //Esconder el modal
     const hideDialog = () => {
-        setSubmitted(false);
         setUpdateDialog(false);
         setListDialog(false);
     }
@@ -110,68 +113,8 @@ const IndexUsu = () => {
         setchangeStateDialog(false);
     }
 
-    const validations = new FormValidations()
-    let validate = true
-    //validaciones
-    const validarcampos = () =>{
-        validate = (
-            validations.validation(usuario.nombreUsuario,['textos'])
-            &&
-            validations.validation(usuario.apellidoUsuario,['textos'])
-            &&
-            validations.validation(usuario.correoUsuario,['correo'])
-            &&
-            validations.validation(usuario.telefonoFijo,['numeros'])
-            &&
-            validations.validation(usuario.telefonoCelular,['numeros'])
-            &&
-            validations.validation(usuario.telefonoCelular,['numeros'])
-            &&
-            validations.validation(usuario.fechaNacimientoUsuario,['fechas'])
-            &&
-            validations.validation(usuario.numeroDocumento,['numeros'])
-        )
-            return validate
-    }
-
-    //accion para guardar un registro
-    const saveProduct = () => {
-        setSubmitted(true);
-
-        if(validarcampos()){
-            //Esto verifica que el producto tenga un id para actualizarlo, si no es asi es un nuevo registo
-            if (usuario.idUsuario) {
-                servicioUsu.updateUsuario(usuario.idUsuario, usuario).then(res=>{
-                    //anuncio de exito :D
-                    toast.current.show({ severity: 'success', summary: 'Todo Bien', detail: `Usuario ${usuario.nombreUsuario} Actualizado`, life: 3000 });
-                })
-                setEstado(!estado)
-            }
-            else {
-                servicioUsu.createUsuario(usuario).then(res=>{
-                    //Mensaje de exito :D
-                    toast.current.show({ severity: 'success', summary: 'Todo Bien', detail: `El usuario ${usuario.nombreUsuario} A sido Creado Con Exito`, life: 3000 });
-                })
-                setEstado(!estado)
-            }
-
-            //Escone la alerta
-            setUpdateDialog(false);
-            //resetea el formulario o mejor dicho el objeto
-            setUsuario(emptyUsuario);
-        }else{
-            toast.current.show({ severity: 'error', summary: 'Error', detail: `No se puede enviar el formulario, campos registrados de manera inadecuada`, life: 3000 });
-        }
-
-    }
-
     //accion que se realiza al darle click a el icono de editar, recibe un objeto y este objeto depende de la posision en la tabla
-    const editUsuario = (usuario) => {
-        //envia los datos de este objeto a la "plantilla"
-        setUsuario({ ...usuario });
-        //muestra la ventana emerjente de actualizacion de producto
-        setUpdateDialog(true);
-    }
+
     const listUsuario = (usuario) => {
         //envia los datos de este objeto a la "plantilla"
         setUsuario({ ...usuario });
@@ -203,13 +146,6 @@ const IndexUsu = () => {
         dt.current.exportCSV();
     }
 
-    //Esto es para que el imput funcione bien
-    const onInputChange = (e, name) => {
-        const val = (e.target && e.target.value) || '';
-        let _usuario = { ...usuario };
-        _usuario[`${name}`] = val;
-        setUsuario(_usuario);
-    }
 
     //Codigo de las acciones de la tabla
     const leftToolbarTemplate = () => {
@@ -217,7 +153,7 @@ const IndexUsu = () => {
             //retorna un fragmento de codigo con botones, parte superior izquierda
             <React.Fragment>
                 <div className="my-2">
-                    <Button label="Nuevo" icon="pi pi-plus" className="p-button-success mr-2" onClick={openNew} />
+                    <Button label="Nuevo" icon={AiOutlineUserAdd} iconPos="right" className="p-button-success mr-2" onClick={openNew} />
                 </div>
             </React.Fragment>
         )
@@ -304,7 +240,7 @@ const IndexUsu = () => {
         <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
             <h5 className="m-0">
                 Usuarios {(pageState)?'Activos':'Inactivos'}
-            <Button onClick={(pageState)?listarUsuariosInactivos:listarUsuariosActivos} style={{transform: 'rotate(90deg)'}} icon="pi pi-sort-alt" iconPos="right" tooltip={`Listar Usuarios ${(pageState)?'Inactivos':'Activos'}`} className="p-button-rounded p-button-secondary p-button-text"/>
+            <Button icon={(pageState)?RiUserReceivedFill:RiUserSharedFill} onClick={(pageState)?listarUsuariosInactivos:listarUsuariosActivos} tooltip={`Listar Usuarios ${(pageState)?'Inactivos':'Activos'}`} className="p-button-rounded p-button-secondary p-button-text" />
             </h5>
             <span className="block mt-2 md:mt-0 p-input-icon-left">
                 <i className="pi pi-search" />
@@ -313,13 +249,6 @@ const IndexUsu = () => {
         </div>
     );
 
-    //La parte inferior de la ventana de dialogo de update/create, con dos botones: cancelar que lo cierra y guardar que genra el cambio
-    const productDialogFooter = (
-        <>
-            <Button label="Cancelar" icon="pi pi-times" className="p-button-text" onClick={hideDialog} />
-            <Button label="Guardar" icon="pi pi-check" className="p-button-text" onClick={saveProduct} />
-        </>
-    );
 
     //La parte inferior de el dialog de borrado, lo mismo de antes y sus dos botones
     const deleteProductDialogFooter = (
@@ -342,6 +271,126 @@ const IndexUsu = () => {
     const footerList = <span>
         <Button label="Cerrar" icon="pi pi-times" className="p-button-secondary" onClick={hideDialog}/>
     </span>;
+
+    //FORMIK
+
+
+    const formik = useFormik({
+        initialValues: emptyUsuario,
+        validate: (data) => {
+            let errors = {};
+            if (!data.nombreUsuario) {
+                errors.nombreUsuario = 'El Nombre es obligatorio.';
+            }else if(!(data.nombreUsuario.length >= 3 && data.nombreUsuario.length <= 25)){
+                errors.nombreUsuario = 'Cantidad de caracteres de 3 a 25 .';
+            }
+
+            if (!data.apellidoUsuario) {
+                errors.apellidoUsuario = 'El Apellido es obligatorio.';
+            }
+
+            if (!data.correoUsuario) {
+                errors.correoUsuario = 'El Correo es obligatorio.';
+            }else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.correoUsuario)){
+                errors.correoUsuario = 'Debe ingresar un formato valido.';
+            }
+
+
+
+            if (!/^\d{0,20}$/.test(data.telefonoFijo)){
+                errors.telefonoFijo = 'El Telefono debe ser un numero.';
+            }
+
+            if(!data.telefonoCelular){
+                errors.telefonoCelular = 'El Celular es obligatorio.';
+            }
+            if (!/^\d{0,20}$/.test(data.telefonoCelular)){
+                errors.telefonoCelular = 'El Celular debe ser un numero.';
+            }
+
+            if(!data.idCiudad_FK || data.idCiudad_FK === ''){
+                errors.idCiudad_FK = 'La Ciudad De Recidencia es obligatoria.';
+            }
+
+            if(!data.idUsuario){
+                if (!data.correoUsuario2){
+                    errors.correoUsuario2 = 'La Verificacion es obligatoria.';
+                }else if(!(data.correoUsuario === data.correoUsuario2)){
+                    errors.correoUsuario2 = 'Los Campos no coinciden.';
+                }
+
+                if(!data.fechaNacimientoUsuario){
+                    errors.fechaNacimientoUsuario = 'La Fecha es obligatoria.';
+                }
+
+
+                if(!data.idTipoDocumento_FK){
+                    errors.idTipoDocumento_FK = 'El Tipo de Documento de es obligatorio.';
+                }
+
+                if(!data.numeroDocumento){
+                    errors.numeroDocumento = 'El Número de Documento de es obligatorio.';
+                }else if(!/^\d{0,20}$/.test(data.numeroDocumento)){
+                    errors.numeroDocumento = 'El Número de Documento debe ser un numero.';
+                }
+
+                if(!data.fechaExpedicionDoc){
+                    errors.fechaExpedicionDoc = 'La Fecha de Expedicion es obligatoria.';
+                }
+
+                if(!data.LugarExpedicionDoc){
+                    errors.LugarExpedicionDoc = 'El Lugar De Expedicion es obligatorio.';
+                }
+
+            }
+
+            return errors;
+        },
+        onSubmit: (data) => {
+            if (data.idUsuario) {
+
+                servicioUsu.updateUsuario(data.idUsuario, data).then(res=>{
+                    //anuncio de exito :D
+                    toast.current.show({ severity: 'success', summary: 'Todo Bien', detail: `Usuario ${data.nombreUsuario} Actualizado`, life: 3000 });
+                })
+            }
+            else {
+                servicioUsu.createUsuario(data).then(res=>{
+                    //Mensaje de exito :D
+                    toast.current.show({ severity: 'success', summary: 'Todo Bien', detail: `El usuario ${data.nombreUsuario} A sido Creado Con Exito`, life: 3000 });
+                })
+            }
+            //Escone la alerta
+            setUpdateDialog(false);
+            //resetea el formulario o mejor dicho el objeto
+            setUsuario(emptyUsuario);
+
+            setEstado(!estado)
+            formik.resetForm();
+        }
+    });
+
+
+    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+
+    const getFormErrorMessage = (name) => {
+        return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+    };
+
+    //La parte inferior de la ventana de dialogo de update/create, con dos botones: cancelar que lo cierra y guardar que genra el cambio
+    const productDialogFooter = (
+        <>
+            <Button label="Cancelar" icon="pi pi-times" className="p-button-text" onClick={hideDialog} />
+            <Button label="Guardar" icon="pi pi-check" className="p-button-text" type="button" onClick={()=>formik.handleSubmit()} />
+        </>
+    );
+
+    const editUsuario = (usuario) => {
+        formik.setValues(usuario)
+        //muestra la ventana emerjente de actualizacion de usuario
+        setUpdateDialog(true);
+    }
+
 
     //aqui ya empieza el codigo normal :D
     return (
@@ -369,81 +418,131 @@ const IndexUsu = () => {
                     {/* Aqui va la ventana de editar/nuevo */}
                     <Dialog visible={updateDialog} style={{ width: '650px' }} header="Gestion Usuario" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
 
-                        {/* Agregar la ruta de imagen a la api */}
-                        {usuario.image && <img src={`assets/demo/images/${usuario.image}`} alt={usuario.image} width="150" className="mt-0 mx-auto mb-5 block shadow-2" />}
-
-                        <div className="formgrid grid">
-                            <div className="field col">
-                                <label htmlFor="nombreUsuario">Nombre</label>
-                                <InputText id="nombreUsuario" value={usuario.nombreUsuario} onChange={(e) => onInputChange(e, 'nombreUsuario')} required autoFocus className={classNames({ 'p-invalid': submitted && !usuario.nombreUsuario })} />
-                                {submitted && !usuario.nombreUsuario && <small className="p-invalid">Se Requiere El Nombre</small>}
+                <div className="p-d-flex p-jc-center">
+                <div className="card">
+                    <h5 className="p-text-center">{(!formik.values.idUsuario)?"Nuevo Usuario":`Editando a ${formik.values.nombreUsuario}` }</h5>
+                    <form onSubmit={formik.handleSubmit}>
+                        <div className="formgrid grid my-4">
+                            <div className="p-field col">
+                                <span className="p-float-label p-input-icon-right">
+                                    <i><FaUserAlt/></i>
+                                    <InputText id="nombreUsuario" name="nombreUsuario" value={formik.values.nombreUsuario} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('nombreUsuario') })} />
+                                    <label htmlFor="nombreUsuario" className={classNames({ 'p-error': isFormFieldValid('nombreUsuario') })}>Nombre*</label>
+                                </span>
+                                {getFormErrorMessage('nombreUsuario')}
                             </div>
-                            <div className="field col">
-                                <label htmlFor="apellidoUsuario">Apellido</label>
-                                <InputText id="apellidoUsuario" value={usuario.apellidoUsuario} onChange={(e) => onInputChange(e, 'apellidoUsuario')} required className={classNames({ 'p-invalid': submitted && !usuario.apellidoUsuario })} />
-                                {submitted && !usuario.apellidoUsuario && <small className="p-invalid">Se Requiere El Apellido</small>}
-                            </div>
-                        </div>
-
-                        <div className="field">
-                            <label htmlFor="correoUsuario">Correo</label>
-                            <InputText id="correoUsuario" value={usuario.correoUsuario} onChange={(e) => onInputChange(e, 'correoUsuario')} required className={classNames({ 'p-invalid': submitted && !usuario.correoUsuario })} />
-                            {submitted && !usuario.correoUsuario && <small className="p-invalid">Se Requiere El Correo</small>}
-                        </div>
-
-                        <div className="formgrid grid">
-                            <div className="field col">
-                                <label htmlFor="telefonoFijo">Telefono Fijo</label>
-                                <InputText id="telefonoFijo" value={usuario.telefonoFijo} onChange={(e) => onInputChange(e, 'telefonoFijo')} />
-                            </div>
-                            <div className="field col">
-                                <label htmlFor="telefonoCelular">Telefono Celular</label>
-                                <InputText id="telefonoCelular" value={usuario.telefonoCelular} onChange={(e) => onInputChange(e, 'telefonoCelular')} required className={classNames({ 'p-invalid': submitted && !usuario.telefonoCelular })} />
-                                {submitted && !usuario.telefonoCelular && <small className="p-invalid">Se Requiere El Telefono Celular</small>}
+                            <div className="p-field col">
+                                <span className="p-float-label p-input-icon-right">
+                                    <i><FaUserAlt/></i>
+                                    <InputText id="apellidoUsuario" name="apellidoUsuario" value={formik.values.apellidoUsuario} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('apellidoUsuario') })} />
+                                    <label htmlFor="apellidoUsuario" className={classNames({ 'p-error': isFormFieldValid('apellidoUsuario') })}>Apellido*</label>
+                                </span>
+                                {getFormErrorMessage('apellidoUsuario')}
                             </div>
                         </div>
 
-                        <div className="formgrid grid">
-                            {!usuario.idUsuario &&
-                                <div className="field col">
-                                    <label htmlFor="fechaNacimientoUsuario">Fecha Nacimiento</label>
-                                    <Calendar yearRange={`${today.getFullYear()-90}:${today.getFullYear()-14}`} id="fechaNacimientoUsuario" value={usuario.fechaNacimientoUsuario} onChange={(e) => onInputChange(e, 'fechaNacimientoUsuario')}monthNavigator yearNavigator required className={classNames({ 'p-invalid': submitted && !usuario.fechaExpedicionDoc })}
-                                    monthNavigatorTemplate={monthNavigatorTemplate} yearNavigatorTemplate={yearNavigatorTemplate}/>
-                                    {submitted && !usuario.fechaNacimientoUsuario && <small className="p-invalid">Se Requiere Seleccionar Una Fecha</small>}
-                                </div>
-                            }
-                            <div className="field col">
-                                <label>Ciudad De Residencia</label>
-                                <SelectCiudad idCiudad={usuario.idCiudad_FK} onInputChange={onInputChange} name={'idCiudad_FK'}/>
+                        <div className="formgrid grid my-4">
+                            <div className="p-field col">
+                                <span className="p-float-label p-input-icon-right">
+                                    <i><MdEmail /></i>
+                                    <InputText id="correoUsuario" name="correoUsuario" value={formik.values.correoUsuario} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('correoUsuario') })} />
+                                    <label htmlFor="correoUsuario" className={classNames({ 'p-error': isFormFieldValid('correoUsuario') })}>Correo*</label>
+                                </span>
+                                {getFormErrorMessage('correoUsuario')}
                             </div>
-
-                        </div>
-
-                        <SelectTipoDocumento idTipoDoc={usuario.idTipoDocumento_FK} onInputChange={onInputChange}/>
-
-                        <div className="formgrid grid">
-                            {!usuario.idUsuario &&
-                                <div className="field col">
-                                    <label htmlFor="numeroDocumento">Numero Documento</label>
-                                    <InputText id="numeroDocumento" value={usuario.numeroDocumento} onChange={(e) => onInputChange(e, 'numeroDocumento')} required className={classNames({ 'p-invalid': submitted && !usuario.numeroDocumento })} />
-                                    {submitted && !usuario.numeroDocumento && <small className="p-invalid">Se Requiere El Numero De Documento</small>}
-                                </div>
-                            }
-                            {!usuario.idUsuario &&
-                                <div className="field col">
-                                    <label htmlFor="fechaExpedicionDoc">Fecha Expedicion Documento</label>
-                                    <Calendar yearRange={`${today.getFullYear()-90}:${today.getFullYear()}`} id="fechaExpedicionDoc" value={usuario.fechaExpedicionDoc} onChange={(e) => onInputChange(e, 'fechaExpedicionDoc')}monthNavigator yearNavigator required className={classNames({ 'p-invalid': submitted && !usuario.fechaExpedicionDoc })}
-                                    monthNavigatorTemplate={monthNavigatorTemplate} yearNavigatorTemplate={yearNavigatorTemplate}/>
-                                    {submitted && !usuario.fechaExpedicionDoc && <small className="p-invalid">Se Requiere Seleccionar Una Fecha</small>}
+                            {!formik.values.idUsuario &&
+                                <div className="p-field col">
+                                    <span className="p-float-label p-input-icon-right">
+                                        <i><MdMarkEmailRead/></i>
+                                        <InputText id="correoUsuario2" name="correoUsuario2" value={formik.values.correoUsuario2} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('correoUsuario2') })} />
+                                        <label htmlFor="correoUsuario2" className={classNames({ 'p-error': isFormFieldValid('correoUsuario2') })}>Verificacion De Correo*</label>
+                                    </span>
+                                    {getFormErrorMessage('correoUsuario2')}
                                 </div>
                             }
                         </div>
-                        {!usuario.idUsuario &&
-                        <div className="field">
-                            <label>Lugar Expedicion Documento</label>
-                            <SelectBarrio idCiudad={usuario.LugarExpedicionDoc} onInputChange={onInputChange} name={'LugarExpedicionDoc'}/>
+
+                        <div className="formgrid grid my-4">
+                            <div className="p-field col">
+                                <span className="p-float-label p-input-icon-right">
+                                    <i><BsFillTelephoneFill/></i>
+                                    <InputText id="telefonoFijo" name="telefonoFijo" value={formik.values.telefonoFijo} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('telefonoFijo') })} />
+                                    <label htmlFor="telefonoFijo" className={classNames({ 'p-error': isFormFieldValid('telefonoFijo') })}>Telefono</label>
+                                </span>
+                                {getFormErrorMessage('telefonoFijo')}
+                            </div>
+                            <div className="p-field col">
+                                <span className="p-float-label p-input-icon-right">
+                                    <i><MdOutlinePhoneAndroid/></i>
+                                    <InputText id="telefonoCelular" name="telefonoCelular" value={formik.values.telefonoCelular} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('telefonoCelular') })} />
+                                    <label htmlFor="telefonoCelular" className={classNames({ 'p-error': isFormFieldValid('telefonoCelular') })}>Telefono Celular*</label>
+                                </span>
+                                {getFormErrorMessage('telefonoCelular')}
+                            </div>
                         </div>
+
+                        <div className="formgrid grid my-4">
+                            {!formik.values.idUsuario &&
+                                <div className="p-field col">
+                                    <span className="p-float-label p-input-icon-right">
+                                        <Calendar  name="fechaNacimientoUsuario" yearRange={`${today.getFullYear()-90}:${today.getFullYear()-14}`} id="fechaNacimientoUsuario" value={formik.values.fechaNacimientoUsuario} onChange={formik.handleChange}  monthNavigator yearNavigator className={classNames({ 'p-invalid': isFormFieldValid('fechaNacimientoUsuario') })}
+                                        readOnlyInput monthNavigatorTemplate={monthNavigatorTemplate} yearNavigatorTemplate={yearNavigatorTemplate}/>
+                                        <i><FaRegCalendarAlt/></i>
+                                        <label htmlFor="fechaNacimientoUsuario" className={classNames({ 'p-error': isFormFieldValid('fechaNacimientoUsuario') })}>Fecha Nacimiento*</label>
+                                    </span>
+                                    {getFormErrorMessage('fechaNacimientoUsuario')}
+                                </div>
+                            }
+                            <div className="p-field col">
+                                <span className="p-float-label p-input-icon-right">
+                                    <SelectCiudad name="idCiudad_FK" value={formik.values.idCiudad_FK} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('idCiudad_FK') })} />
+                                    <label htmlFor="idCiudad_FK" className={classNames({ 'p-error': isFormFieldValid('idCiudad_FK') })}>Ciudad Recidencia*</label>
+                                </span>
+                                {getFormErrorMessage('idCiudad_FK')}
+                            </div>
+                        </div>
+                        {!formik.values.idUsuario &&
+                            <div>
+                                <label htmlFor="idTipoDocumento_FK" className={classNames({ 'p-error': isFormFieldValid('idTipoDocumento_FK') })}>Tipo Documento*</label>
+                                <SelectTipoDocumento name="idTipoDocumento_FK" value={formik.values.idTipoDocumento_FK} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('idTipoDocumento_FK') })}/>
+                                {getFormErrorMessage('idTipoDocumento_FK')}
+                            </div>
                         }
+                        {!formik.values.idUsuario &&
+                            <div className="formgrid grid my-4">
+                                <div className="p-field col">
+                                    <span className="p-float-label p-input-icon-right">
+                                        <i><FaAddressCard/></i>
+                                        <InputText id="numeroDocumento" name="numeroDocumento" value={formik.values.numeroDocumento} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('numeroDocumento') })} />
+                                        <label htmlFor="numeroDocumento" className={classNames({ 'p-error': isFormFieldValid('numeroDocumento') })}>Numero De Documento*</label>
+                                    </span>
+                                    {getFormErrorMessage('numeroDocumento')}
+                                </div>
+                                <div className="p-field col">
+                                    <span className="p-float-label p-input-icon-right">
+                                        <Calendar name="fechaExpedicionDoc" yearRange={`${today.getFullYear()-90}:${today.getFullYear()}`} id="fechaExpedicionDoc" value={formik.values.fechaExpedicionDoc} onChange={formik.handleChange}  monthNavigator yearNavigator className={classNames({ 'p-invalid': isFormFieldValid('fechaExpedicionDoc') })}
+                                        readOnlyInput monthNavigatorTemplate={monthNavigatorTemplate} yearNavigatorTemplate={yearNavigatorTemplate}/>
+                                        <i><FaRegCalendarAlt/></i>
+                                        <label htmlFor="fechaExpedicionDoc" className={classNames({ 'p-error': isFormFieldValid('fechaExpedicionDoc') })}>Fecha Expedicion Doc*</label>
+                                    </span>
+                                    {getFormErrorMessage('fechaExpedicionDoc')}
+                                </div>
+                            </div>
+                        }
+                        {!formik.values.idUsuario &&
+                            <div className="p-field my-4">
+                                <span className="p-float-label p-input-icon-right">
+                                    <i className="pi pi-envelope" />
+                                    <SelectCiudad name="LugarExpedicionDoc" value={formik.values.LugarExpedicionDoc} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('LugarExpedicionDoc') })} />
+                                    <label htmlFor="LugarExpedicionDoc" className={classNames({ 'p-error': isFormFieldValid('LugarExpedicionDoc') })}>Lugar Expedicion Documento*</label>
+                                </span>
+                                {getFormErrorMessage('LugarExpedicionDoc')}
+                            </div>
+                        }
+                    </form>
+                </div>
+            </div>
+
 
                     </Dialog>
 

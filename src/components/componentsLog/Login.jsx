@@ -1,20 +1,22 @@
-import React from 'react';
+import React, { useRef } from 'react';
+
 import { useFormik } from 'formik';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
-import "primeicons/primeicons.css";
-import "primereact/resources/themes/saga-blue/theme.css";
-import "primereact/resources/primereact.css";
-import "primeflex/primeflex.css";
 import ReactDOM from "react-dom";
 import { Password } from "primereact/password";
 import { Divider } from "primereact/divider";
 import { Tooltip } from 'primereact/tooltip';
 import { useHistory } from 'react-router';
+import { ServicioCredencial } from '../../service/ServicioCredencial';
+import { Toast } from 'primereact/toast';
 
 
-const Login = () => {
+export const Login = () => {
+    const toast = useRef(null);
+
+    const serviCredencial = new ServicioCredencial()
 
     const history = useHistory();
 
@@ -47,8 +49,17 @@ const Login = () => {
             return errors;
         },
         onSubmit: (data) => {
+            serviCredencial.Login(data).then(res=>{
+                if(res.status===201){
+                    localStorage.setItem('token', res.data.success)
+                    history.push('/dash')
+                }else{
+                    toast.current.show({ severity: 'error', summary: 'Error', detail: res.data.error, life: 3000 });
+                }
+            }).catch(err=>{
+                console.log(err)
+            })
 
-            history.push('/dash')
             formik.resetForm();
         }
     });
@@ -122,6 +133,9 @@ const Login = () => {
                 </div>
 
             </div>
+
+            <Toast ref={toast} position="bottom-right"/>
+
         </div>
     );
 }
