@@ -126,7 +126,7 @@ const Ventajas = () => {
 
                         <div className="swiper-slide">
                         <div className="testimonial-item">
-                           
+
                         <a class="filter-btn nav-link active btn-outline-light rounded-pill text-dark px-4 light-600 mb-3" href="#" data-filter=".project">Comodidad</a>
                             <h4>Facilidad al Usar</h4>
                             <p className="text-light">
@@ -137,11 +137,11 @@ const Ventajas = () => {
 
                         <div className="swiper-slide">
                         <div className="testimonial-item">
-                            
+
                         <a class="filter-btn nav-link active btn-outline-light rounded-pill text-dark px-4 light-600 mb-3" href="#" data-filter=".project">Intuitivo</a>
-                            <h4>Todo desde la comodidad de tu casa</h4>
+                            <h4>Interfaces muy explicitas</h4>
                             <p className="text-light">
-                            Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla
+                            Todo esta a tu alcance, cada apartado es facil de encontrar y siempre tienen un identificador grafico que recordaras muy bien la proxima vez que ingrese.
                             </p>
                         </div>
                         </div>
@@ -149,9 +149,9 @@ const Ventajas = () => {
                         <div className="swiper-slide">
                         <div className="testimonial-item">
                         <a class="filter-btn nav-link active btn-outline-light rounded-pill text-dark px-4 light-600 mb-3" href="#" data-filter=".project">Ayuda</a>
-                            <h4>Freelancer</h4>
+                            <h4>your assistant</h4>
                             <p className="text-light">
-                            Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim 
+                            Si tienes problemas con algo, puedes contactarnos llamando a nuestro numero telefonico, escribir a nuestro correo o si es algo relacionado con encontrar algo en la pagina puedes leer el instructivo.
                             </p>
                         </div>
                         </div>

@@ -117,10 +117,10 @@ const Slideshow = () => {
               //Mover el slideshow
               slideshow.current.style.transform=`translateX(0)`;
            }, 30)
-           
+
       }
     }
-    
+
     const Siguiente=()=>{
       //Comprobar que si hayan elementos en el slideshow
       if(slideshow.current.children.length>0){
@@ -128,7 +128,7 @@ const Slideshow = () => {
         const primerElemento=slideshow.current.children[0];
 
         //Establecer la transicion para el slideshow
-        slideshow.current.style.transition=`300ms ease-out all`; 
+        slideshow.current.style.transition=`300ms ease-out all`;
 
         //Tamaño Slide
         const tamañoSlide=slideshow.current.children[0].offsetWidth;
@@ -145,17 +145,17 @@ const Slideshow = () => {
           slideshow.current.appendChild(primerElemento);
 
           slideshow.current.removeEventListener('transitionend', transicion);
-        } 
+        }
 
         //EventListener para cuando termina la animación
         slideshow.current.addEventListener('transitionend', transicion);
       }
     }
-  
+
     // useEffect(()=>{
     //    setInterval(()=>{
     //       Siguiente();
-    //    }, 5000) 
+    //    }, 5000)
     // }, [])
 
     return (
@@ -186,17 +186,9 @@ const Slideshow = () => {
                 <img src={ImageThree} alt="" />
               </a>
               <TextoSlide>
-                <h1>Necesito este texto</h1>
-                <p>en mi pagina web</p>
-              </TextoSlide>
-            </Slide>
-            <Slide>
-              <a href="/">
-                <img src={ImageFour} alt="" />
-              </a>
-              <TextoSlide>
-                <h1>Necesito este texto</h1>
-                <p>en mi pagina web</p>
+                <h1>¿Te gustaria donar materiales?</h1>
+                <p>Hoy puedes ser parte de la solución y sostenimiento<br /> de nuestra fundación, brindandonos un apoyo material, generando grandes cambios.</p>
+                <Buutton to='/catalogoAnimales' primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar en Especie</Buutton>
               </TextoSlide>
             </Slide>
           </ContenedorSlideshow>
@@ -204,11 +196,11 @@ const Slideshow = () => {
                 <Boton onClick={Anterior}>
                     <PrevArrow />
                 </Boton>
-                <Boton derecho onClick={Siguiente}> 
+                <Boton derecho onClick={Siguiente}>
                     <NextArrow />
                 </Boton>
             </Controles>
-          
+
         </ContenedorPrincipal>
     )
 }
