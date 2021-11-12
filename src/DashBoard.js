@@ -42,7 +42,6 @@ import './dashBoard.scss';
 
 
 import IndexUsu from './pages/usuario/IndexUsu';
-import Pruebar from './components/componentsLog/Pruebar';
 
 const DashBoard = () => {
 
@@ -297,7 +296,7 @@ const DashBoard = () => {
             <div className="layout-main-container">
                 <div className="layout-main">
                     <Route path="/dash/inicio">
-                        <Pruebar />
+
                     </Route>
                     <Route path="/dash/usuarios" exact>
                         <IndexUsu/>

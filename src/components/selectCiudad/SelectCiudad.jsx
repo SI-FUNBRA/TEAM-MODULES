@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { ServicioPais } from '../../service/ServicioPais';
-import { Tooltip } from 'primereact/tooltip';
 
 const SelectCiudad = (props) => {
 

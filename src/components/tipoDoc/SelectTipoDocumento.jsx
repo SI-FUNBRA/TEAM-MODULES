@@ -17,6 +17,7 @@ const SelectTipoDocumento = (props) => {
     const onCategoryChange = (e) => {
         setTipoDOc(e.value);
         props.onChange(e)
+        console.log(e)
     }
 
 
@@ -29,6 +30,7 @@ const SelectTipoDocumento = (props) => {
                             <RadioButton inputId={props.name} name={props.name} value={_tipoDoc.idTipoDoc} onChange={onCategoryChange} checked={tipoDoc === _tipoDoc.idTipoDoc} />
                             <label htmlFor={props.name} >{_tipoDoc.nombreTipoDoc}</label>
                         </div>
+
                 ))
                 }
             </div>

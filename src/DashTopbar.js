@@ -18,7 +18,6 @@ export const DashTopbar = (props) => {
         const serviUsu = new ServicioUsu()
 
         serviUsu.getUsertopbar().then(res=>{
-            console.log(res.data)
             setInfoTopBar(res.data)
         })
 

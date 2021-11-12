@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 import { useFormik } from 'formik';
 import { InputText } from 'primereact/inputtext';
@@ -10,11 +10,9 @@ import { Divider } from "primereact/divider";
 import { Tooltip } from 'primereact/tooltip';
 import { useHistory } from 'react-router';
 import { ServicioCredencial } from '../../service/ServicioCredencial';
-import { Toast } from 'primereact/toast';
 
 
-export const Login = () => {
-    const toast = useRef(null);
+export const Login = (props) => {
 
     const serviCredencial = new ServicioCredencial()
 
@@ -54,7 +52,7 @@ export const Login = () => {
                     localStorage.setItem('token', res.data.success)
                     history.push('/dash')
                 }else{
-                    toast.current.show({ severity: 'error', summary: 'Error', detail: res.data.error, life: 3000 });
+                    props.toast.current.show({ severity: 'error', summary: 'Error', detail: res.data.error, life: 3000 });
                 }
             }).catch(err=>{
                 console.log(err)
@@ -70,7 +68,7 @@ export const Login = () => {
     };
 
     const handleRegistrarse = () =>{
-        history.push('/log/register')
+        history.push('/log/register/1')
     }
 
     return (
@@ -134,7 +132,6 @@ export const Login = () => {
 
             </div>
 
-            <Toast ref={toast} position="bottom-right"/>
 
         </div>
     );

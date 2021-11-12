@@ -1,15 +1,16 @@
 .imgFondo1 {
     position: absolute;
     bottom: 4rem;
-    left: 5rem;
-    filter: invert(20%);
+    left: 5rem; /*
+    filter: invert(20%); */
+    mix-blend-mode: hard-light;
 }
 
 .imgFondo2 {
     position: absolute;
     bottom: 4rem;
     right: 5rem;
-    filter: invert(90%);
+    mix-blend-mode: hard-light;
 }
 
 @media (max-width: 900px) {

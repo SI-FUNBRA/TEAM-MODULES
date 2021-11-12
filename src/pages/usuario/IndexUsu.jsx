@@ -67,17 +67,19 @@ const IndexUsu = () => {
 
     let iconchangeState = `pi ${(pageState)?'pi-trash':'pi-check-circle'}`
 
-    const getUsuariosActivos=()=>{
-        servicioUsu.getUsuarios().then(res => setUsuarios(res.data));
-    }
+
     const getUsuariosInactivos=()=>{
         servicioUsu.getUsuariosInactivos().then(res => setUsuarios(res.data));
     }
 
+    const getUsuariosActivos=()=>{
+        servicioUsu.getUsuarios().then(res => setUsuarios(res.data));
+    }
     //Obtener la data para llenar las tables
     useEffect(() => {
+        const servicioUsu = new ServicioUsu();
+        servicioUsu.getUsuarios().then(res => setUsuarios(res.data));
         setPageState(true)
-        getUsuariosActivos()
     },[estado]);
 
     const listarUsuariosInactivos = () =>{
@@ -138,6 +140,7 @@ const IndexUsu = () => {
             toast.current.show({ severity: 'warn', summary: 'Todo Bien', detail: `Usuario ${pageState?'Inactivado':'Activado'}`, life: 3000 });
         })
         hidechangeStateDialog()
+
         pageState?getUsuariosActivos():getUsuariosInactivos()
     }
 
