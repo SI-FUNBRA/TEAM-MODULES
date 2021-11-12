@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const FuncionalidadesSection=styled.section`    
+const FuncionalidadesSection=styled.section`
         min-height: 100vh;
         width: 100%;
         display: flex;
@@ -16,7 +16,7 @@ const FuncionalidadesSection=styled.section`
           margin: 0 auto;
           position: relative;
         }
-        
+
         .timeline ul {
           list-style: none;
         }
@@ -115,25 +115,25 @@ const Funcionalidades = () => {
                     <li>
                       <div className="timeline-content">
                         <h1><strong>Citas</strong></h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut eos placeat laborum, quibusdam exercitationem labore.</p>
+                        <p>Asignamos citas para tus adopciones acoplandonos siempre a tu, participaciones y donaciones en especie y todo a como se te acomode el horario, y siempre desde tu celular.</p>
                       </div>
                     </li>
                     <li>
                       <div className="timeline-content">
                         <h1><strong>Seguimiento Animales</strong></h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut eos placeat laborum, quibusdam exercitationem labore.</p>
+                        <p>Somos muy cuidadosos cuando tenemos bajo nuestra responsabilidad un animalito, asi que llevar siempre su seguimiento actualizado y transparente para nosotros es una prioridad.</p>
                       </div>
                     </li>
                     <li>
                       <div className="timeline-content">
                         <h1><strong>Gestion Animales</strong></h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut eos placeat laborum, quibusdam exercitationem labore.</p>
+                        <p>Gracias a las nuevas actualizaciones y estrategias de ZOOPPORT las gestiones son mas rapidaz y con unos patrones muy eficacez, que en cualquier situación siempre se tendra el control veloz de esto.</p>
                       </div>
                     </li>
                     <li>
                       <div className="timeline-content">
                         <h1><strong>Reporte</strong></h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora ab laudantium voluptatibus aut eos placeat laborum, quibusdam exercitationem labore.</p>
+                        <p>Tanto en archivos pdf, excel, json y csv podemos mostrarte cada reporte que generamos dependiendo de la funcionalidad que desees, eso si, siempre con detalles que facilitaran el entendimiento de los mismos.</p>
                       </div>
                     </li>
                   </ul>

@@ -4,6 +4,10 @@ import Login from '../../components/componentsLog/Login'
 import Register from '../../components/componentsLog/Register'
 import Pruebar from '../../components/componentsLog/Pruebar'
 
+import { Link } from 'react-router-dom';
+
+import {AiOutlineClose} from 'react-icons/ai';
+
 
 import './Log.css'
 
@@ -16,6 +20,8 @@ const Log = () => {
 
             <img className="imgFondo1" src={'assets/demo/images/log/blanquito/hueco.png'} alt="fondo" />
             <img className="imgFondo2" src={'assets/demo/images/log/conejo.png'} alt="fondo" />
+
+            <Link to='/' className="close"><AiOutlineClose size={30} /></Link>
 
             <Switch>
                 <Route exact path="/log/login">
