@@ -10,6 +10,8 @@ import { HashRouter, Switch,Route } from 'react-router-dom'
 import ScrollToTop from './ScrollToTop';
 import HomePage from './pages/Home/Homepage'
 import Log from './pages/Login/Log';
+import DonacionEconomica from './pages/Donacion/Donaciones';
+import ListDonEcon from './components/components-donaciones/donacionEconomica/ListDonEcon'
 
 ReactDOM.render(
     <HashRouter>
@@ -20,7 +22,12 @@ ReactDOM.render(
                 </Route>
                 <Route path="/log" >
                     <Log />
-
+                </Route>
+                <Route path="/donacionEconomica/listDonEcon">
+                    <ListDonEcon />
+                </Route>
+                <Route path="/donacionEconomica">
+                    <DonacionEconomica />
                 </Route>
                 <Route exact path="/" >
                     <HomePage />

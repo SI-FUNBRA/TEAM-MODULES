@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import image from '../../images/imagaSeven.jpg';
@@ -38,12 +38,12 @@ const AcercaDeSection=styled.section`
         .inner-container{
             width: 100%;
         }
-        
+
     }
 
     @media screen and (max-width:600px){
         padding:0;
-        
+
         .inner-container{
             padding:60px;
         }
@@ -55,13 +55,13 @@ const AcercaDe = () => {
         <AcercaDeSection id='/acercaDe'>
             <div className="inner-container">
                 <h1>Funbra - Zoopport</h1>
-                <p class="text">
+                <p className="text">
                 Somos una Fundación sin fines de lucro, dedicada a el bienestar de toda la comunidad, tomando como inicio el gremio animalista. Rescatamos Y Rehabilitamos animales habitantes en estado de vulnerabilidad.
                 </p>
-                <p class="text">
-                Somos una fundacion dedicada al rescate y rehabilitacion de los animales habitantes de la calle, luego de esto iniciamos proceso de adopcion :)
+                <p className="text">
+                Somos una fundacion dedicada al rescate y rehabilitacion de los animales habitantes de la calle, luego de esto iniciamos proceso de adopcion.
                 </p>
-            </div>           
+            </div>
         </AcercaDeSection>
     )
 }

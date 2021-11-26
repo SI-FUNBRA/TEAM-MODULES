@@ -112,10 +112,9 @@ const Navbar = ({toggle}) => {
             <NaavMenuBars onClick={toggle}/>
             <NaavMenu>
                 {menuData.map((item, i)=>(
-                    <Link>
+                    <Link key={i}>
                         <NaavMenuLinks
                             to={item.link}
-                            key={i}
                             activeClass="active"
                             spy={true}
                             smooth={true}

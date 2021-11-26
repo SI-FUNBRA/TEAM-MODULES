@@ -163,17 +163,17 @@ const Slideshow = () => {
           <ContenedorSlideshow ref={slideshow}>
             <Slide>
               <a href="/">
-                <img src={ImageOne} alt="" />
+                <img src={ImageOne} alt="DonacionEcon" />
               </a>
               <TextoSlide>
                 <h1>¿Te gustaria Donar?</h1>
                 <p>En nuestra fundación te agradecemos por tu colaboración<br /> es muy importante para tanto nosotros como para nuestros animalitos.</p>
-                <Buutton primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar</Buutton>
+                <Buutton to='/donacionEconomica' primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar</Buutton>
               </TextoSlide>
             </Slide>
             <Slide>
               <a href="/">
-                <img src={ImageTwo} alt="" />
+                <img src={ImageTwo} alt="Adoptar" />
               </a>
               <TextoSlide>
                 <h1>¿Te gustaria Adoptar?</h1>
@@ -183,7 +183,7 @@ const Slideshow = () => {
             </Slide>
             <Slide>
               <a href="/">
-                <img src={ImageThree} alt="" />
+                <img src={ImageThree} alt="DonarEspecie" />
               </a>
               <TextoSlide>
                 <h1>¿Te gustaria donar materiales?</h1>
