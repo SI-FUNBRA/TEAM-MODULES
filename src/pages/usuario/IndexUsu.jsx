@@ -414,7 +414,7 @@ const IndexUsu = () => {
                         <Column field="apellidoUsuario" header="Apellido" sortable body={apellidoBodyTemplate}></Column>
                         <Column field="telefonoCelular" header="Ceular" body={celularBodyTemplate} sortable></Column>
                         <Column field="numeroDocumento" header="Documento" sortable body={documentoBodyTemplate}></Column>
-                        <Column field="Ciudad.nombreCiudad" header="Barrio" body={barrioBodyTemplate} sortable></Column>
+                        <Column field="Ciudad.nombreCiudad" header="Ciudad" body={barrioBodyTemplate} sortable></Column>
                         <Column header="Mas" body={actionBodyTemplate} style={{ width: '70px' }} ></Column>
                     </DataTable>
 

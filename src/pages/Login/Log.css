@@ -13,13 +13,24 @@
     mix-blend-mode: hard-light;
 }
 
-.close{
-    position:absolute;
-    color: #000;
+.close {
+    position: absolute;
     top: 40px;
     left: 40px;
     z-index: 1;
+    mix-blend-mode: luminosity;
 }
 
-@media (max-width: 900px) {
+.arrowClose {
+    position: absolute;
+    top: 5px;
+    animation: ArrowSlide infinite 0.5s ease;
+}
+@keyframes ArrowSlide {
+    0% {
+        left: -15px;
+    }
+    100% {
+        left: -21px;
+    }
 }
