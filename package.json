@@ -1,33 +1,29 @@
 {
-    "name": "sakai-react",
-    "version": "6.0.1-SNAPSHOT",
+    "name": "zooport",
+    "version": "1.0.0",
     "homepage": ".",
     "private": false,
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/primefaces/sakai-react.git"
-    },
-    "license": "MIT",
     "dependencies": {
         "@fullcalendar/core": "^5.7.2",
         "@fullcalendar/daygrid": "^5.7.2",
         "@fullcalendar/interaction": "^5.7.2",
-        "@fullcalendar/timegrid": "^5.7.2",
         "@fullcalendar/react": "^5.7.0",
+        "@fullcalendar/timegrid": "^5.7.2",
+        "axios": "^0.23.0",
         "chart.js": "3.3.2",
-        "primereact": "6.6.0",
+        "classnames": "^2.2.6",
         "primeflex": "3.0.0",
         "primeicons": "^4.1.0",
-        "prismjs": "1.9.0",
+        "primereact": "6.6.0",
+        "prismjs": "^1.25.0",
         "react": "^17.0.1",
         "react-app-polyfill": "^1.0.6",
         "react-dom": "^17.0.1",
+        "react-if-elseif-else-render": "^1.0.2",
         "react-router-dom": "^5.2.0",
         "react-scripts": "3.4.1",
         "react-transition-group": "^4.4.1",
-        "sass": "^1.32.8",
-        "axios": "^0.19.0",
-        "classnames": "^2.2.6"
+        "sass": "^1.32.8"
     },
     "scripts": {
         "start": "react-scripts start",

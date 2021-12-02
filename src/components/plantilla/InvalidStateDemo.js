@@ -9,7 +9,7 @@ import { Chips } from 'primereact/chips';
 import { Dropdown } from 'primereact/dropdown';
 import { MultiSelect } from 'primereact/multiselect';
 import { Password } from 'primereact/password';
-import { CountryService } from '../service/CountryService';
+import { CountryService } from '../../service/plantilla/CountryService';
 
 export const InvalidStateDemo = () => {
 

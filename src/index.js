@@ -6,6 +6,8 @@ import App from './App';
 import { HashRouter } from 'react-router-dom'
 import ScrollToTop from './ScrollToTop';
 
+import './PrimeTranslate'
+
 ReactDOM.render(
     <HashRouter>
         <ScrollToTop>

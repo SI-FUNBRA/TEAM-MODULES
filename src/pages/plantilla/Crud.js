@@ -12,11 +12,10 @@ import { RadioButton } from 'primereact/radiobutton';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
-import { ProductService } from '../service/ProductService';
+import { ProductService } from '../../service/plantilla/ProductService';
 
 export const Crud = () => {
-
-    let emptyProduct = {
+let emptyProduct = {
         id: null,
         name: '',
         image: null,
@@ -39,77 +38,109 @@ export const Crud = () => {
     const toast = useRef(null);
     const dt = useRef(null);
 
+
+    //Obtener la data para llenar las tables
     useEffect(() => {
         const productService = new ProductService();
-        productService.getProducts().then(data => setProducts(data));
+        productService.getProducts().then(data => {setProducts(data);console.log(data)});
     }, []);
 
+    //formato de moneda es tan sencillo como poner en google 'como poner a pesos colombianos en js'
     const formatCurrency = (value) => {
-        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        return value.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
     }
 
+    //Abrir el modal pero vacio, lo que significa que va a ser un nuevo producto
     const openNew = () => {
+        //Aqui le establece el valor vacio por defecto
         setProduct(emptyProduct);
         setSubmitted(false);
         setProductDialog(true);
     }
 
+    //Esconder el modal
     const hideDialog = () => {
         setSubmitted(false);
         setProductDialog(false);
     }
 
+    //Esconde la ventana de dialogo de el delete
     const hideDeleteProductDialog = () => {
         setDeleteProductDialog(false);
     }
 
+    //dialogo de borrado masivo
     const hideDeleteProductsDialog = () => {
         setDeleteProductsDialog(false);
     }
 
+    //accion para guardar un registro
     const saveProduct = () => {
         setSubmitted(true);
-
+        //Ni idea para que el if :(
         if (product.name.trim()) {
+
             let _products = [...products];
             let _product = { ...product };
-            if (product.id) {
-                const index = findIndexById(product.id);
 
+            //Esto verifica que el producto tenga un id para actualizarlo, si no es asi es un nuevo registo
+            if (product.id) {
+                //cambiar esto, es mas facil que manejar un arreglo
+                const index = findIndexById(product.id);
                 _products[index] = _product;
+                //anuncio de exito :D
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             }
             else {
+                //Esto es para crear id, entonces como hay autoincrement es innecesario
                 _product.id = createId();
+                //solo pa la imagen ya que al parecer el formulario de ejemplo no cuenta con una insersion de archivos
                 _product.image = 'product-placeholder.svg';
+                //pushea el elemento al arreglo(no lo necesitamos)
                 _products.push(_product);
+                //Mensaje de exito :D
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
 
             setProducts(_products);
+            //Escone la alerta
             setProductDialog(false);
+            //resetea el formulario o mejor dicho el objeto
             setProduct(emptyProduct);
         }
     }
 
+    //accion que se realiza al darle click a el icono de editar, recibe un objeto y este objeto depende de la posision en la tabla
     const editProduct = (product) => {
+        //envia los datos de este objeto a la "plantilla"
         setProduct({ ...product });
+        //muestra la ventana emerjente de actualizacion de producto
         setProductDialog(true);
     }
 
+    //esta funcion muestra la ventana de "está seguro de borrar?"
     const confirmDeleteProduct = (product) => {
+        //de igual manera establece la "plantilla" para guardar el id del producto que va a borrar
         setProduct(product);
+        //muestra la ventana de dialogo
         setDeleteProductDialog(true);
     }
 
+    //funcion para borrar un producto
     const deleteProduct = () => {
+        //simplemente borra como si fuera un arreglo
+        //no poner mucho cuidado!!
         let _products = products.filter(val => val.id !== product.id);
         setProducts(_products);
+        //Oculta el mensaje de borrar
         setDeleteProductDialog(false);
+        //resetea el formulario o mejor dicho el objeto
         setProduct(emptyProduct);
+        //Mostrar mensaje de Proceso realizado full 4k esitoso
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
     }
 
+    //no poner mucha atencion
     const findIndexById = (id) => {
         let index = -1;
         for (let i = 0; i < products.length; i++) {
@@ -122,6 +153,7 @@ export const Crud = () => {
         return index;
     }
 
+    //no poner mucha atencion x2
     const createId = () => {
         let id = '';
         let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -131,28 +163,37 @@ export const Crud = () => {
         return id;
     }
 
+    //esto es para exportar la info de la tabla a CSV... si se puede modificar, ni idea
     const exportCSV = () => {
         dt.current.exportCSV();
     }
 
+    //Mostrar dialogo del borrado masivo
     const confirmDeleteSelected = () => {
         setDeleteProductsDialog(true);
     }
 
+    //Borrar productos masivamente
     const deleteSelectedProducts = () => {
+        //cosas de arreglos, si se va a implementar toca modificar la api
         let _products = products.filter(val => !selectedProducts.includes(val));
         setProducts(_products);
+        //ocultar alerta
         setDeleteProductsDialog(false);
         setSelectedProducts(null);
+        //mensaje de exito :D
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
     }
 
+
+    //Esto es para que el select funcione bien
     const onCategoryChange = (e) => {
         let _product = { ...product };
         _product['category'] = e.value;
         setProduct(_product);
     }
 
+    //Esto es para que el imput funcione bien
     const onInputChange = (e, name) => {
         const val = (e.target && e.target.value) || '';
         let _product = { ...product };
@@ -161,6 +202,7 @@ export const Crud = () => {
         setProduct(_product);
     }
 
+    //Lo mismo de arriba pero con numeros
     const onInputNumberChange = (e, name) => {
         const val = e.value || 0;
         let _product = { ...product };
@@ -169,8 +211,10 @@ export const Crud = () => {
         setProduct(_product);
     }
 
+    //Codigo de las acciones de la tabla
     const leftToolbarTemplate = () => {
         return (
+            //retorna un fragmento de codigo con botones, parte superior izquierda
             <React.Fragment>
                 <div className="my-2">
                     <Button label="New" icon="pi pi-plus" className="p-button-success mr-2" onClick={openNew} />
@@ -180,6 +224,7 @@ export const Crud = () => {
         )
     }
 
+    //Esto al parecer son las acciones disponibles de exportacion, parte superior derecha
     const rightToolbarTemplate = () => {
         return (
             <React.Fragment>
@@ -189,6 +234,7 @@ export const Crud = () => {
         )
     }
 
+    //Parece ser la primera columna de la tabla, la que corresponde a "Code"
     const codeBodyTemplate = (rowData) => {
         return (
             <>
@@ -252,6 +298,7 @@ export const Crud = () => {
         )
     }
 
+    //corresponde a la columna de las acciones
     const actionBodyTemplate = (rowData) => {
         return (
             <div className="actions">
@@ -261,6 +308,7 @@ export const Crud = () => {
         );
     }
 
+    //Parte Superior de la tabla, donde está el search, parece que el search solo setea un estado que se define antes...
     const header = (
         <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
             <h5 className="m-0">Manage Products</h5>
@@ -271,18 +319,21 @@ export const Crud = () => {
         </div>
     );
 
+    //La parte inferior de la ventana de dialogo de update/create, con dos botones: cancelar que lo cierra y guardar que genra el cambio
     const productDialogFooter = (
         <>
             <Button label="Cancel" icon="pi pi-times" className="p-button-text" onClick={hideDialog} />
             <Button label="Save" icon="pi pi-check" className="p-button-text" onClick={saveProduct} />
         </>
     );
+    //La parte inferior de el dialog de borrado, lo mismo de antes y sus dos botones
     const deleteProductDialogFooter = (
         <>
             <Button label="No" icon="pi pi-times" className="p-button-text" onClick={hideDeleteProductDialog} />
             <Button label="Yes" icon="pi pi-check" className="p-button-text" onClick={deleteProduct} />
         </>
     );
+    //lo mismo de antes pero con el borrado masivo
     const deleteProductsDialogFooter = (
         <>
             <Button label="No" icon="pi pi-times" className="p-button-text" onClick={hideDeleteProductsDialog} />
@@ -290,6 +341,7 @@ export const Crud = () => {
         </>
     );
 
+    //aqui ya empieza el codigo normal :D
     return (
         <div className="grid crud-demo">
             <div className="col-12">
@@ -375,5 +427,5 @@ export const Crud = () => {
                 </div>
             </div>
         </div>
-    );
+    )
 }
