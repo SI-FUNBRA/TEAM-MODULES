@@ -1,20 +1,16 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 import { useFormik } from 'formik';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
-import ReactDOM from "react-dom";
 import { Password } from "primereact/password";
 import { Divider } from "primereact/divider";
 import { Tooltip } from 'primereact/tooltip';
 import { useHistory } from 'react-router';
 import { ServicioCredencial } from '../../service/ServicioCredencial';
-import { Toast } from 'primereact/toast';
 
-
-export const Login = () => {
-    const toast = useRef(null);
+export const Login = (props) => {
 
     const serviCredencial = new ServicioCredencial()
 
@@ -54,7 +50,7 @@ export const Login = () => {
                     localStorage.setItem('token', res.data.success)
                     history.push('/dash')
                 }else{
-                    toast.current.show({ severity: 'error', summary: 'Error', detail: res.data.error, life: 3000 });
+                    props.toast.current.show({ severity: 'error', summary: 'Error', detail: res.data.error, life: 3000 });
                 }
             }).catch(err=>{
                 console.log(err)
@@ -70,14 +66,18 @@ export const Login = () => {
     };
 
     const handleRegistrarse = () =>{
-        history.push('/log/register')
+        history.push('/log/register/1')
+    }
+
+    const handleOlvideContra = () =>{
+        history.push('/log/RecuperarContraseña')
     }
 
     return (
         <div className="flex align-items-center justify-content-center" style={{width: "100%", height: "100%", position: 'fixed'}}>
             <div className="card p-5">
                 <div className="flex align-items-center justify-content-center">
-                        <form onSubmit={formik.handleSubmit} className="p-fluid">
+                        <form onSubmit={formik.handleSubmit} className="p-fluid relative">
                             <h5 className="text-center">Iniciar Sesión</h5>
                             <div className="formgrid mt-5 mb-4 relative">
                                 <div className="field col p-inputgroup m-0">
@@ -121,7 +121,8 @@ export const Login = () => {
                                 </div>
                                 <p className="mx-6 absolute" style={{top:'2.6rem'}}>{getFormErrorMessage('pass')}</p>
                             </div>
-                            <Button type="submit" label="Ingresar" />
+                            <Button type="button" onClick={handleOlvideContra} label="Olvidé mi contraseña" className="p-button-text absolute"  style={{bottom:"-18px"}}/>
+                            <Button type="submit" label="Ingresar" className="mb-4"/>
                         </form>
                 </div>
                 <Divider align="center">
@@ -134,14 +135,11 @@ export const Login = () => {
 
             </div>
 
-            <Toast ref={toast} position="bottom-right"/>
 
         </div>
     );
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<Login />, rootElement);
 export default Login
 
 

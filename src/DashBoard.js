@@ -42,7 +42,7 @@ import './dashBoard.scss';
 
 
 import IndexUsu from './pages/usuario/IndexUsu';
-import Pruebar from './components/componentsLog/Pruebar';
+import OtrosModulos from './pages/OtrosModulos/OtrosModulos';
 
 const DashBoard = () => {
 
@@ -161,7 +161,8 @@ const DashBoard = () => {
         {
             label: 'Modulos',
             items: [
-                {label:'Usuarios', icon:'pi pi-fw pi-users', to:'/dash/usuarios'}
+                {label:'Usuarios', icon:'pi pi-fw pi-users', to:'/dash/usuarios'},
+                {label:'Otros Modulos', icon:'pi pi-fw pi-th-large', to:'/dash/otrosmodulos'}
             ]
         },
         {
@@ -297,10 +298,13 @@ const DashBoard = () => {
             <div className="layout-main-container">
                 <div className="layout-main">
                     <Route path="/dash/inicio">
-                        <Pruebar />
+
                     </Route>
                     <Route path="/dash/usuarios" exact>
                         <IndexUsu/>
+                    </Route>
+                    <Route path="/dash/otrosmodulos" exact>
+                        <OtrosModulos/>
                     </Route>
                     {/* Plantilla */}
                     <Route path="/dash" exact component={Dashboard}/>

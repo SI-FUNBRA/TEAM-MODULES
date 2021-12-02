@@ -8,4 +8,16 @@ export class ServicioTipoDoc {
         return axios.get(URL)
     }
 
+    createTipoDoc(data){
+        return axios.post(URL, data)
+    }
+
+    updateTipoDoc(data, id){
+        return axios.put(`${URL}/actualizar/${id}`, data)
+    }
+
+    deleteTipoDoc(id){
+        return axios.delete(`${URL}/${id}`)
+    }
+
 }
