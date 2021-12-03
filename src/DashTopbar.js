@@ -2,18 +2,19 @@ import React, { useEffect, useRef, useState }  from 'react';
 import { useHistory,Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Menu } from 'primereact/menu';
-
+import { Dialog } from 'primereact/dialog';
 import './DashTopbar.css'
 import { ServicioUsu } from './service/ServicioUsu';
+import { Button } from 'primereact/button';
 
 export const DashTopbar = (props) => {
 
     const history = new useHistory()
 
-
     const [infoTopBar, setInfoTopBar] = useState({
-        nombre:''
+        roles:[]
     })
+    const [dialogRoles, setDialogRoles] = useState(false)
     useEffect(() => {
         const serviUsu = new ServicioUsu()
 
@@ -23,11 +24,35 @@ export const DashTopbar = (props) => {
 
     }, [])
 
+    const showDialogRoles = () =>{
+        setDialogRoles(true)
+    }
+    const hideDialogRoles = () =>{
+        setDialogRoles(false)
+    }
+
     const menu = useRef(null);
 
     const cerrarSesion = () =>{
         localStorage.removeItem('token')
         history.push("/log/login")
+    }
+
+    const redireccionar = (ruta) =>{
+        history.push(ruta)
+    }
+
+    const rolLabel = (idRol) =>{
+        switch (idRol) {
+            case 1:
+                return "Administrador"
+            case 2:
+                return "Gerente"
+
+            default:
+                return "Participante"
+
+        }
     }
 
     const overlayMenuItems = [
@@ -39,12 +64,14 @@ export const DashTopbar = (props) => {
             items:[
 
             {
-                label:"Administrador",
-                icon: 'pi pi-refresh'
+                label:rolLabel(infoTopBar.Rol),
+                icon: 'pi pi-refresh',
+                command:showDialogRoles
             },
             {
                 label:"Perfil",
-                icon: 'pi pi-cog'
+                icon: 'pi pi-cog',
+                command:()=>redireccionar('/dash/perfil')
             }
         ]
         },
@@ -88,6 +115,20 @@ export const DashTopbar = (props) => {
                         </button>
 
                 </div>
+
+                <Dialog className="col-10 md:col-6 xl:col-5" position="top" visible={dialogRoles} header="Selecciona El Rol" modal onHide={hideDialogRoles}>
+                        <div className="text-center d-none d-xl-block">
+                            <Button icon="pi pi-user" label="Administrador" className="p-button-rounded p-button-primary ml-2" />
+                            <Button icon="pi pi-cog" label="Gerente" className="p-button-rounded p-button-secondary ml-2" />
+                            <Button icon="pi pi-info" label="Participante" className="p-button-rounded p-button-warning ml-2" />
+
+                        </div>
+                        <div className="text-center d-block d-xl-none">
+                            <Button tooltip="Administrador" icon="pi pi-user" className="p-button-rounded p-button-primary ml-2" />
+                            <Button tooltip="Gerente" icon="pi pi-cog" className="p-button-rounded p-button-secondary mx-4" />
+                            <Button tooltip="Participante" icon="pi pi-info" className="p-button-rounded p-button-warning ml-2" />
+                        </div>
+                </Dialog>
         </div>
     );
 }

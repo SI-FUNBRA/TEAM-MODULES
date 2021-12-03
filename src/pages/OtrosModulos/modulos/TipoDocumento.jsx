@@ -38,7 +38,7 @@ const TipoDocumento = () => {
     //Obtener la data para llenar las tables
     useEffect(() => {
         const servicioTipoDoc = new ServicioTipoDoc();
-        servicioTipoDoc.getTiposDoc().then(res => setItems(res.data));
+        servicioTipoDoc.getTiposDoc().then(res => setItems(res.data)).catch(()=>{});
         setPageState(true)
     },[estado]);
 
@@ -114,7 +114,7 @@ const TipoDocumento = () => {
                             <InputText className="" type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Buscar..." />
                         </span>
                     </div>
-                    <Button icon="pi pi-plus" type="button" onClick={openNew} tooltip="Nuevo Tipo Documento" className="mx-auto mt-2 col-3 p-button-rounded p-button-primary" />
+                    <Button icon="pi pi-plus" type="button" onClick={openNew} tooltip="Nuevo Tipo Documento" tooltipOptions={{position:"left"}} className="mx-auto mt-2 col-3 p-button-rounded p-button-primary" />
 
         </div>
     );

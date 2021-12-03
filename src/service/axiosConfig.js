@@ -13,5 +13,8 @@ axios.interceptors.response.use(config=>{
         localStorage.removeItem('token')
         alert(err.response.data.error)
         window.location.href = '/';
+    }if (err.response.status === 403) {
+        alert(err.response.data.error)
+        window.location.href = '/#/dash/inicio';
     }
   });

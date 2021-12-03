@@ -20,12 +20,20 @@ export class ServicioCredencial {
         return axios.post(`${URL}/validateuser`, data)
     }
 
+    changeUsername(data, idusuario){
+        return axios.put(`${URL}/cambiousername/${idusuario}`, data)
+    }
+
     RecoverPassword(data){
         return axios.post(`${URL}/olvidecontra`, data)
     }
 
     ChangePassword(data, tokenpass){
         return axios.put(`${URL}/restablecer-contra`, data, {headers:{"tokenpass":tokenpass}})
+    }
+
+    NewPass(data, id){
+        return axios.put(`${URL}/cambiarcontra/${id}`, data)
     }
 
 }

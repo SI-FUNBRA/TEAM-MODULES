@@ -78,7 +78,7 @@ const IndexUsu = () => {
     //Obtener la data para llenar las tables
     useEffect(() => {
         const servicioUsu = new ServicioUsu();
-        servicioUsu.getUsuarios().then(res => setUsuarios(res.data));
+        servicioUsu.getUsuarios().then(res => setUsuarios(res.data)).catch(()=>{});
         setPageState(true)
     },[estado]);
 
@@ -217,15 +217,6 @@ const IndexUsu = () => {
         );
     }
 
-    const avatarBodyTemplate = (rowData) => {
-        return (
-            <>
-                <span className="p-column-title">Avatar</span>
-                <img src={'assets/layout/images/inecesario.gif'} alt={rowData.image} width="70" />
-            </>
-        )
-    }
-
     //corresponde a la columna de las acciones
     const actionBodyTemplate = (rowData) => {
         return (
@@ -284,12 +275,18 @@ const IndexUsu = () => {
             let errors = {};
             if (!data.nombreUsuario) {
                 errors.nombreUsuario = 'El Nombre es obligatorio.';
+            }else if(!/^[A-Za-zá-ýÁ-Ý ]+$/.test(data.nombreUsuario)){
+                errors.nombreUsuario = 'El nombre solo acepta letras y espacios.';
             }else if(!(data.nombreUsuario.length >= 3 && data.nombreUsuario.length <= 25)){
                 errors.nombreUsuario = 'Cantidad de caracteres de 3 a 25 .';
             }
 
             if (!data.apellidoUsuario) {
                 errors.apellidoUsuario = 'El Apellido es obligatorio.';
+            }else if(!/^[A-Za-zá-ýÁ-Ý ]+$/.test(data.apellidoUsuario)){
+                errors.apellidoUsuario = 'El Apellido solo acepta letras y espacios.';
+            }else if(!(data.apellidoUsuario.length >= 3 && data.apellidoUsuario.length <= 25)){
+                errors.apellidoUsuario = 'Cantidad de caracteres de 3 a 25 .';
             }
 
             if (!data.correoUsuario) {
@@ -306,8 +303,7 @@ const IndexUsu = () => {
 
             if(!data.telefonoCelular){
                 errors.telefonoCelular = 'El Celular es obligatorio.';
-            }
-            if (!/^\d{0,20}$/.test(data.telefonoCelular)){
+            }else if (!/^\d{0,20}$/.test(data.telefonoCelular)){
                 errors.telefonoCelular = 'El Celular debe ser un numero.';
             }
 
@@ -404,12 +400,12 @@ const IndexUsu = () => {
                 <div className="card">
                     <Toast ref={toast} position="bottom-right"/>
                     <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                    <div className="card p-0">
                     <DataTable ref={dt} value={usuarios}
                         dataKey="id" paginator rows={7} rowsPerPageOptions={[7, 10, 25]} className="datatable-responsive"
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="Registros {first} a {last} de un total de {totalRecords}"
                         globalFilter={globalFilter} emptyMessage="No se encontro ningun registro." header={header}>
-                        <Column body={avatarBodyTemplate}></Column>
                         <Column field="nombreUsuario" header="Nombre" sortable body={nombreBodyTemplate}></Column>
                         <Column field="apellidoUsuario" header="Apellido" sortable body={apellidoBodyTemplate}></Column>
                         <Column field="telefonoCelular" header="Ceular" body={celularBodyTemplate} sortable></Column>
@@ -417,7 +413,7 @@ const IndexUsu = () => {
                         <Column field="Ciudad.nombreCiudad" header="Ciudad" body={barrioBodyTemplate} sortable></Column>
                         <Column header="Mas" body={actionBodyTemplate} style={{ width: '70px' }} ></Column>
                     </DataTable>
-
+                    </div>
                     {/* Aqui va la ventana de editar/nuevo */}
                     <Dialog visible={updateDialog} style={{ width: '650px' }} header="Gestion Usuario" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
 
@@ -547,21 +543,18 @@ const IndexUsu = () => {
             </div>
 
 
-                    </Dialog>
+            </Dialog>
 
                     <Dialog visible={listDialog} style={{ width: '450px' }} header={`${usuario.nombreUsuario} ${usuario.apellidoUsuario}`} modal className="p-fluid" footer={footerList} onHide={hideDialog}>
-                        <Card>
-                            <p><strong>Correo:</strong>{usuario.correoUsuario}</p>
-                            <p><strong>Telefono Fijo:</strong>{usuario.telefonoFijo}</p>
-                            <p><strong>Telefono Celular:</strong>{usuario.telefonoCelular}</p>
-                            <p><strong>Telefono Celular:</strong>{usuario.telefonoCelular}</p>
-                            <p><strong>Fecha Nacimiento:</strong>{usuario.fechaNacimientoUsuario}</p>
-                            <p><strong>Tipo Documento:</strong>{usuario.TipoDocumento.nombreTipoDoc}</p>
-                            <p><strong>Numero Documento:</strong>{usuario.numeroDocumento}</p>
-                            <p><strong>Fecha Expedicion Documento:</strong>{usuario.fechaExpedicionDoc}</p>
-                            <p><strong>Lugar Expedicion Documento:</strong>{usuario.LugarExpedicionDocu.nombreCiudad}</p>
-                            <p><strong>Ciudad Residencia:</strong>{usuario.Ciudad.nombreCiudad}</p>
-                        </Card>
+                        <p><strong>Correo:</strong>{usuario.correoUsuario}</p>
+                        <p><strong>Telefono Fijo:</strong>{usuario.telefonoFijo}</p>
+                        <p><strong>Telefono Celular:</strong>{usuario.telefonoCelular}</p>
+                        <p><strong>Fecha Nacimiento:</strong>{usuario.fechaNacimientoUsuario}</p>
+                        <p><strong>Tipo Documento:</strong>{usuario.TipoDocumento.nombreTipoDoc}</p>
+                        <p><strong>Numero Documento:</strong>{usuario.numeroDocumento}</p>
+                        <p><strong>Fecha Expedicion Documento:</strong>{usuario.fechaExpedicionDoc}</p>
+                        <p><strong>Lugar Expedicion Documento:</strong>{usuario.LugarExpedicionDocu.nombreCiudad}</p>
+                        <p><strong>Ciudad Residencia:</strong>{usuario.Ciudad.nombreCiudad}</p>
                     </Dialog>
 
                     <Dialog visible={changeStateDialog} style={{ width: '450px' }} header="¡Cuidado!" modal footer={deleteProductDialogFooter} onHide={hidechangeStateDialog}>

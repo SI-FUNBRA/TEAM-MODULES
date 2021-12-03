@@ -7,15 +7,21 @@ import { Button } from 'primereact/button';
 import { Row } from 'primereact/row';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
-import { ServicioRol } from '../../../service/ServicioRol';
+import { ServicioCiudad } from '../../../service/ServicioCiudad';
 import { useFormik } from 'formik';
 
 import { FaUserAlt } from "react-icons/fa";
-const TipoUsuario = () => {
+import SelectPais from '../../../components/SelectPais';
+const Ciudades = () => {
 
     let emptyItem = {
-        idRol: "",
-        nombreRol: '',
+        idCiudad: '',
+        nombreCiudad: '',
+        idPais_FK:'',
+
+        Pai:{
+            nombrePais:''
+        }
     };
 
     const [Items, setItems] = useState(null);
@@ -31,14 +37,14 @@ const TipoUsuario = () => {
 
     const [pageState, setPageState] = useState(true)
 
-    const servicioRol = new ServicioRol();
+    const servicioCiudad = new ServicioCiudad();
 
     let iconchangeState = `pi ${(pageState)?'pi-trash':'pi-check-circle'}`
 
     //Obtener la data para llenar las tables
     useEffect(() => {
-        const servicioRol = new ServicioRol();
-        servicioRol.getRol().then(res => setItems(res.data)).catch(()=>{});
+        const servicioCiudad = new ServicioCiudad();
+        servicioCiudad.getCiudades().then(res =>  setItems(res.data) ).catch(()=>{});
         setPageState(true)
     },[estado]);
 
@@ -72,7 +78,7 @@ const TipoUsuario = () => {
 
     //Eliminar
     const changeState = () => {
-        servicioRol.deleteRol(Item.idRol).then(res=>{
+        servicioCiudad.deleteCiudad(Item.idCiudad).then(res=>{
             if(res.status===200){
                 toast.current.show({ severity: 'error', summary: 'Error', detail: res.data.err, life: 3000 });
                 hidechangeStateDialog()
@@ -87,7 +93,15 @@ const TipoUsuario = () => {
     const barrioBodyTemplate = (rowData) => {
         return (
             <>
-                {rowData.nombreRol}
+                {rowData.nombreCiudad}
+            </>
+        );
+    }
+
+    const paisBodyTemplate = (rowData) => {
+        return (
+            <>
+                {rowData.Pai.nombrePais}
             </>
         );
     }
@@ -114,7 +128,7 @@ const TipoUsuario = () => {
                             <InputText className="" type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Buscar..." />
                         </span>
                     </div>
-                    <Button icon="pi pi-plus" type="button" onClick={openNew} tooltip="Nuevo Rol" tooltipOptions={{position:"left"}} className="mx-auto mt-2 col-3 p-button-rounded p-button-primary" />
+                    <Button icon="pi pi-plus" type="button" onClick={openNew} tooltip="Nuevo País" tooltipOptions={{position:"left"}} className="mx-auto mt-2 col-3 p-button-rounded p-button-primary" />
 
         </div>
     );
@@ -133,28 +147,28 @@ const TipoUsuario = () => {
         validate: (data) => {
             let errors = {};
 
-            if (!data.nombreRol) {
-                errors.nombreRol = 'El rol es obligatorio.';
-            }else if(!/^[A-Za-z]+$/.test(data.nombreRol)){
-                errors.nombreRol = 'Solo puede contener letras.';
-            }else if(data.nombreRol.length>20){
-                errors.nombreRol = 'El maximo es de 20 caracteres.'
+            if (!data.nombreCiudad) {
+                errors.nombreCiudad = 'El país es obligatorio.';
+            }else if(!/^[A-Za-zá-ýÁ-ý. ]+$/.test(data.nombreCiudad)){
+                errors.nombreCiudad = 'No se permiten números.';
+            }else if(data.nombreCiudad.length>20){
+                errors.nombreCiudad = 'El maximo es de 20 caracteres.'
             }
 
             return errors;
         },
         onSubmit: (data) => {
-            if (data.idRol) {
+            if (data.idCiudad) {
 
-                servicioRol.updateRol(data, data.idRol).then(()=>{
+                servicioCiudad.updateCiudad(data, data.idCiudad).then(()=>{
                     //anuncio de exito :D
-                    toast.current.show({ severity: 'success', summary: 'Todo Bien', detail: `El Rol ${data.nombreRol} Actualizado`, life: 3000 });
+                    toast.current.show({ severity: 'success', summary: 'Todo Bien', detail: `La Ciudad ${data.nombreCiudad} Actualizado`, life: 3000 });
                 })
             }
             else {
-                servicioRol.createRol(data).then(()=>{
+                servicioCiudad.createCiudad(data).then(()=>{
                     //Mensaje de exito :D
-                    toast.current.show({ severity: 'success', summary: 'Todo Bien', detail: `El Rol ${data.nombreRol} A sido Creado Con Exito`, life: 3000 });
+                    toast.current.show({ severity: 'success', summary: 'Todo Bien', detail: `La Ciudad ${data.nombreCiudad} A sido Creado Con Exito`, life: 3000 });
                 })
             }
             //Escone la alerta
@@ -202,22 +216,27 @@ const TipoUsuario = () => {
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="Registros {first} a {last} de un total de {totalRecords}"
                         globalFilter={globalFilter} emptyMessage="No se encontro ningun registro." header={header}>
-                        <Column field="nombreRol" header="Tipo Documento" body={barrioBodyTemplate} sortable></Column>
+                        <Column field="nombreCiudad" header="Nombre" body={barrioBodyTemplate} sortable></Column>
+                        <Column field="Pai.nombrePais" header="País" body={paisBodyTemplate} sortable></Column>
                         <Column header="Acciones" body={actionBodyTemplate}></Column>
                     </DataTable>
 
                 {/* Aqui va la ventana de editar/nuevo */}
-                <Dialog visible={updateDialog} style={{ width: '450px' }} modal header={(!formik.values.idRol)?"Nuevo Tipo Documento":`Editando a ${formik.values.nombreRol}` } className="card p-fluid" footer={productDialogFooter} onHide={hideDialog}>
+                <Dialog visible={updateDialog} style={{ width: '450px' }} modal header={(!formik.values.idCiudad)?"Nuevo País":`Editando a ${formik.values.nombreCiudad}` } className="card p-fluid" footer={productDialogFooter} onHide={hideDialog}>
 
                     <form onSubmit={formik.handleSubmit}>
                         <div className="formgrid grid my-4">
                             <div className="p-field col">
                                 <span className="p-float-label p-input-icon-right">
                                     <i><FaUserAlt/></i>
-                                    <InputText id="nombreRol" name="nombreRol" value={formik.values.nombreRol} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('nombreRol') })} />
-                                    <label htmlFor="nombreRol" className={classNames({ 'p-error': isFormFieldValid('nombreRol') })}>Nombre*</label>
+                                    <InputText id="nombreCiudad" name="nombreCiudad" value={formik.values.nombreCiudad} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('nombreCiudad') })} />
+                                    <label htmlFor="nombreCiudad" className={classNames({ 'p-error': isFormFieldValid('nombreCiudad') })}>Nombre*</label>
                                 </span>
-                                {getFormErrorMessage('nombreRol')}
+                                <span className="p-float-label p-input-icon-right my-4">
+                                    <i><FaUserAlt/></i>
+                                    <SelectPais name="idPais_FK" value={formik.values.idPais_FK} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('idPais_FK') })}/>
+                                </span>
+                                {getFormErrorMessage('nombreCiudad')}
                             </div>
                         </div>
                     </form>
@@ -225,7 +244,7 @@ const TipoUsuario = () => {
                     <Dialog visible={changeStateDialog} style={{ width: '450px' }} header="¡Cuidado!" modal footer={deleteProductDialogFooter} onHide={hidechangeStateDialog}>
                         <div className="flex align-items-center justify-content-center" style={{color:'var(--yellow-700)' }}>
                             <i className="pi pi-exclamation-triangle mr-3 " style={{ fontSize: '3rem' }} />
-                            {Item && <span>¿Está seguro de Eliminar el rol denominado <b>{Item.nombreRol}</b>?</span>}
+                            {Item && <span>¿Está seguro de Eliminar la ciudad denominada <b>{Item.nombreCiudad}</b>?</span>}
                         </div>
                     </Dialog>
 
@@ -235,4 +254,4 @@ const TipoUsuario = () => {
     )
 }
 
-export default TipoUsuario
+export default Ciudades

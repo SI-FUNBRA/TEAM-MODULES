@@ -9,6 +9,10 @@ export class ServicioUsu {
         return axios.get(URL)
     }
 
+    getUsuarioPorId(id){
+        return axios.get(`${URL}/usuario/${id}`)
+    }
+
     getUsuariosInactivos(){
         return axios.get(`${URL}/inactivos`)
     }
