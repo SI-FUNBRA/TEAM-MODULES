@@ -10,6 +10,7 @@ import { FaBars } from 'react-icons/fa';
 import {animateScroll as scroll} from 'react-scroll';
 
 import Logoo from '../../images/Logo.png';
+import NavBarButonLog from './NavBarButonLog';
 
 const Naav=styled.nav`
     background:${({scrollNav}) => (scrollNav ? '#fff' : 'transparent')};
@@ -128,7 +129,8 @@ const Navbar = ({toggle}) => {
                 ))}
             </NaavMenu>
             <NaavBtn>
-                <Buutton to="/log/login" primary="true">Iniciar Sesión</Buutton>
+                {!localStorage.getItem('token')&&<Buutton to="/log/login" primary="true">Iniciar Sesión</Buutton>}
+                {localStorage.getItem('token')&&<NavBarButonLog/>}
             </NaavBtn>
         </Naav>
     )

@@ -17,10 +17,15 @@ import './Homepage.css'
 import {animateScroll as scroll} from 'react-scroll';
 
 import { AiOutlineArrowUp } from 'react-icons/ai';
+import { Dialog } from 'primereact/dialog';
+import LogPopup from '../../components/components-homepage/LogPopup';
+import { useHistory } from 'react-router-dom';
 
 
 
 const Homepage = () => {
+
+    const history = useHistory();
 
     const [isOpen,setIsOpen]=useState(false);
 
@@ -32,6 +37,21 @@ const Homepage = () => {
         scroll.scrollToTop();
     }
 
+    const [dialogLogin, setDialogLogin] = useState(false)
+
+    const showDialog = (ruta) =>{
+
+        if(localStorage.getItem('token')){
+            history.push(ruta)
+        }else{
+        setDialogLogin(true)
+        }
+    }
+
+    const hideDialog = () =>{
+        setDialogLogin(false)
+    }
+
     return (
         <>
             <GlobalStyle />
@@ -39,7 +59,7 @@ const Homepage = () => {
             <Dropdown isOpen={isOpen} toggle={toggle} />
             <Slideshow />
             <AcercaDe {...InfoData} />
-            <Modulos />
+            <Modulos showDialog={showDialog}/>
             <Funcionalidades {...InfoDataTwo} />
             <Ventajas />
             <Contacto />
@@ -56,6 +76,11 @@ const Homepage = () => {
                 'cursor': 'pointer',
                 'borderRadius': '5px 5px 0 0'
             }} />
+
+            <Dialog className="col-11 d-sm-4 md:col-6 xl:col-5" visible={dialogLogin} header="Para Continuar:" modal onHide={hideDialog}>
+                <LogPopup hideDialog={hideDialog}/>
+            </Dialog>
+
         </>
     );
 };

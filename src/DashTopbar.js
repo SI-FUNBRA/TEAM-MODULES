@@ -15,6 +15,7 @@ export const DashTopbar = (props) => {
         roles:[]
     })
     const [dialogRoles, setDialogRoles] = useState(false)
+
     useEffect(() => {
         const serviUsu = new ServicioUsu()
 
@@ -71,6 +72,11 @@ export const DashTopbar = (props) => {
                 command:showDialogRoles
             },
             {
+                label:"Inicio",
+                icon: 'pi pi-home',
+                command:()=>redireccionar('/')
+            },
+            {
                 label:"Perfil",
                 icon: 'pi pi-cog',
                 command:()=>redireccionar('/dash/perfil')
@@ -96,6 +102,7 @@ export const DashTopbar = (props) => {
         serviCredencial.ChangeRol({rolChange:idRol}).then(res=>{
             console.log(res.data.success)
             localStorage.setItem('token', res.data.success)
+            window.location.href = '/#/dash/inicio';
             window.location.reload();
         }).catch(()=>{})
     }
@@ -109,10 +116,10 @@ export const DashTopbar = (props) => {
             <button type="button" className="p-link  layout-menu-button layout-topbar-button" onClick={props.onToggleMenuClick}>
                 <i className="pi pi-bars"/>
             </button>
-
+{
             <button type="button" className="p-link layout-topbar-menu-button layout-topbar-button" onClick={toggleMenu}>
                 <i className="pi pi-user" />
-            </button>
+            </button>}
 
                 <div className={classNames("layout-topbar-menu lg:flex origin-top")}>
 
