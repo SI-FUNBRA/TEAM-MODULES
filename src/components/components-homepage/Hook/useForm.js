@@ -4,17 +4,17 @@ export const useForm = (initialForm, validateForm) => {
 
     const[form, setForm]=useState(initialForm);
     const [errors, setErrors]=useState({});
-    const[loading, setLoading]=useState(false);
-    const[response, setResponse]=useState(null);
+    const[loading]=useState(false);
+    const[response]=useState(null);
 
     const handleChange=(e)=>{
-        const {name, value}=e.target  
+        const {name, value}=e.target
         setForm({
             ...form,
             [e.target.name]:e.target.value
         })
     }
-    
+
     const handleBlur=(e)=>{}
 
     const handleSubmit=(e)=>{

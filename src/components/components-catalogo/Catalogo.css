@@ -1,0 +1,32 @@
+.cardCatalog{
+  background-color: #fafafa;
+}
+
+.cardCatalog:hover {
+  box-shadow: 5px 10px 20px 1px rgba(255, 255, 255, .5) !important;
+  transition: all 0.7s linear;
+}
+
+.card-bodyCatalog {
+  padding: 2rem 0 !important;
+}
+
+.card-textCatalog {
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
+}
+
+.overflowCatalog {
+  overflow: hidden;
+  width: auto;
+  height: 250px;
+}
+
+.card-img-topCatalog {
+  transform: scale(1);
+  transition: all 0.2s ease-in-out;
+}
+
+.card-img-topCatalog:hover {
+  transform: scale(1.2);
+}

@@ -1,11 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import styled, { css } from 'styled-components/macro';
-import { Link } from 'react-scroll';
-
-import { menuData } from './dataHomepage/MenuData';
-import { Buutton } from './Buutton';
-
+import { menuData } from './MenuData';
 import { FaBars } from 'react-icons/fa';
+import { Link } from 'react-scroll';
 
 import {animateScroll as scroll} from 'react-scroll';
 
@@ -21,9 +18,9 @@ const Naav=styled.nav`
     position:fixed;
     width:100%;
 
-    backdrop-filter: blur(8px) saturate(200%);
-    -webkit-backdrop-filter: blur(8px) saturate(200%);
-    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.76);
     border: 1px solid rgba(209, 213, 219, 0.3);
 `;
 
@@ -70,15 +67,6 @@ const NaavMenuLinks=styled(Link)`
     ${NaavLink}
 `;
 
-const NaavBtn=styled.div`
-    display:flex;
-    align-items:center;
-
-    @media screen and (max-width:1048px){
-        display:none;
-    }
-`;
-
 const Navbar = ({toggle}) => {
 
     const [scrollNav, setScrollNav]=useState(false);
@@ -104,32 +92,30 @@ const Navbar = ({toggle}) => {
             <img src={Logoo} alt="Logo Zoopport" onClick={toggleHome}
                 style={{
                     'cursor': 'pointer',
-                    'margin': '-10px -60px 0 0',
-                    'width': '200px',
+                    'margin': '-10px -45px 0 0',
+                    'width': '210px',
                     'height':'45px'
                 }}
             />
+
             <NaavMenuBars onClick={toggle}/>
-            <NaavMenu>
-                {menuData.map((item, i)=>(
-                    <Link key={i}>
-                        <NaavMenuLinks
-                            to={item.link}
-                            activeClass="active"
-                            spy={true}
-                            smooth={true}
-                            offset={-50}
-                            duration={500}
-                            delay={-1000}
-                            >
-                            {item.title}
-                        </NaavMenuLinks>
-                    </Link>
-                ))}
+                <NaavMenu>
+                    {menuData.map((item, i)=>(
+                        <Link key={i}>
+                            <NaavMenuLinks
+                                to={item.link}
+                                activeClass="active"
+                                spy={true}
+                                smooth={true}
+                                offset={-50}
+                                duration={500}
+                                delay={-1000}
+                                >
+                                {item.title}
+                            </NaavMenuLinks>
+                        </Link>
+                    ))}
             </NaavMenu>
-            <NaavBtn>
-                <Buutton to="/log/login" primary="true">Iniciar Sesión</Buutton>
-            </NaavBtn>
         </Naav>
     )
 }

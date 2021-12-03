@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import ImageOne from '../../images/ImageOne.jpg';
 import ImageTwo from '../../images/ImageTwo.jpg';
 import ImageThree from '../../images/ImageThree.jpg';
-import ImageFour from '../../images/ImageFour.jpg';
+// import ImageFour from '../../images/ImageFour.jpg';
 
 import { IoArrowForward, IoArrowBack } from 'react-icons/io5';
 import { Buutton } from './Buutton';
@@ -163,17 +163,17 @@ const Slideshow = () => {
           <ContenedorSlideshow ref={slideshow}>
             <Slide>
               <a href="/">
-                <img src={ImageOne} alt="" />
+                <img src={ImageOne} alt="DonacionEcon" />
               </a>
               <TextoSlide>
                 <h1>¿Te gustaria Donar?</h1>
                 <p>En nuestra fundación te agradecemos por tu colaboración<br /> es muy importante para tanto nosotros como para nuestros animalitos.</p>
-                <Buutton primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar</Buutton>
+                <Buutton to='/donacionEconomica' primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar</Buutton>
               </TextoSlide>
             </Slide>
             <Slide>
               <a href="/">
-                <img src={ImageTwo} alt="" />
+                <img src={ImageTwo} alt="Adoptar" />
               </a>
               <TextoSlide>
                 <h1>¿Te gustaria Adoptar?</h1>
@@ -183,12 +183,12 @@ const Slideshow = () => {
             </Slide>
             <Slide>
               <a href="/">
-                <img src={ImageThree} alt="" />
+                <img src={ImageThree} alt="DonarEspecie" />
               </a>
               <TextoSlide>
                 <h1>¿Te gustaria donar materiales?</h1>
                 <p>Hoy puedes ser parte de la solución y sostenimiento<br /> de nuestra fundación, brindandonos un apoyo material, generando grandes cambios.</p>
-                <Buutton to='/catalogoAnimales' primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar en Especie</Buutton>
+                <Buutton to='/donacionEspecie' primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar en Especie</Buutton>
               </TextoSlide>
             </Slide>
           </ContenedorSlideshow>

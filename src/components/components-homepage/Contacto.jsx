@@ -7,31 +7,31 @@ import {useForm} from './Hook/useForm';
 const ContactSection=styled.div`
 
     @font-face {
-      src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+      src: url('../fonts/poppins/Poppins-Regular.ttf');
     }
 
     @font-face {
-      src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+      src: url('../fonts/poppins/Poppins-Medium.ttf');
     }
 
     @font-face {
-      src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+      src: url('../fonts/poppins/Poppins-Bold.ttf');
     }
 
     @font-face {
-      src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
+      src: url('../fonts/poppins/Poppins-SemiBold.ttf');
     }
 
     @font-face {
-      src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
+      src: url('../fonts/montserrat/Montserrat-Bold.ttf');
     }
 
     @font-face {
-      src: url('../fonts/montserrat/Montserrat-SemiBold.ttf'); 
+      src: url('../fonts/montserrat/Montserrat-SemiBold.ttf');
     }
 
     @font-face {
-      src: url('../fonts/montserrat/Montserrat-Regular.ttf'); 
+      src: url('../fonts/montserrat/Montserrat-Regular.ttf');
     }
     /*---------------------------------------------*/
     a {
@@ -172,7 +172,7 @@ const ContactSection=styled.div`
     [ Contact ]*/
 
     .container-contact100 {
-      width: 100%;  
+      width: 100%;
       min-height: 100vh;
       display: -webkit-box;
       display: -webkit-flex;
@@ -183,7 +183,7 @@ const ContactSection=styled.div`
       justify-content: center;
       align-items: center;
       background: #f2f2f2;
-      
+
     }
 
     .wrap-contact100 {
@@ -551,8 +551,6 @@ const Contacto = () => {
 
   const{form,
     errors,
-    loading,
-    response,
     handleChange,
     handleBlur,
     handleSubmit}=useForm(initialForm, validationsForm);
@@ -562,12 +560,12 @@ const Contacto = () => {
         <ContactSection id='/contacto'>
             <div className="container-contact100">
               <div className="wrap-contact100">
-                
+
               <div className="contact100-more flex-col-c-m" style={{
-                  "background-image": `url(${image})`,
+                  "backgroundImage": `url(${image})`,
                   'width': '750px',
-                  'margin-right': '30px',
-                  'margin-bottom': '30px'
+                  'marginRight': '30px',
+                  'marginBottom': '30px'
                 }}>
                 </div>
                 <form className="contact100-form validate-form" onSubmit={handleSubmit}>
@@ -583,7 +581,7 @@ const Contacto = () => {
                     <hr />
                     {errors.name&&<p className="mx-3 text-danger font-weight-bold">{errors.name}</p>}
                   </div>
-                  
+
 
 
                   <div className="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
@@ -606,7 +604,7 @@ const Contacto = () => {
 
                   <div className="wrap-input100 validate-input" data-validate = "Message is required">
                     <label className="label-input100" for="message">Ingrese su Mensaje <p className="text-danger d-inline">*</p></label>
-                    <textarea id="message" class="input100" name="message" placeholder="Escribe el texto aqui..." onChange={handleChange} onBlur={handleBlur} value={form.message}></textarea>
+                    <textarea id="message" className="input100" name="message" placeholder="Escribe el texto aqui..." onChange={handleChange} onBlur={handleBlur} value={form.message}></textarea>
                     <span className="focus-input100"></span>
                     <hr />
                     {errors.message&&<p className="mx-3 text-danger font-weight-bold">{errors.message}</p>}
@@ -631,11 +629,11 @@ export default Contacto;
 
 
 
-   
 
-    
 
-    
+
+
+
 
 
 

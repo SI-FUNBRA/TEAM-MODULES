@@ -121,7 +121,6 @@ export const DashTopbar = (props) => {
                             <Button icon="pi pi-user" label="Administrador" className="p-button-rounded p-button-primary ml-2" />
                             <Button icon="pi pi-cog" label="Gerente" className="p-button-rounded p-button-secondary ml-2" />
                             <Button icon="pi pi-info" label="Participante" className="p-button-rounded p-button-warning ml-2" />
-
                         </div>
                         <div className="text-center d-block d-xl-none">
                             <Button tooltip="Administrador" icon="pi pi-user" className="p-button-rounded p-button-primary ml-2" />

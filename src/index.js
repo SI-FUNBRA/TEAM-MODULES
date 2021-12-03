@@ -10,6 +10,12 @@ import { HashRouter, Switch,Route } from 'react-router-dom'
 import ScrollToTop from './ScrollToTop';
 import HomePage from './pages/Home/Homepage'
 import Log from './pages/Login/Log';
+import DonacionEconomica from './pages/Donacion/Donaciones';
+import DonacionEspecie from './pages/Donacion/DonacionesEspecie';
+import ListDonEcon from './components/components-donaciones/donacionEconomica/ListDonEcon';
+import ListDonEsp from './components/components-donaciones/donacionEspecie/ListSolDonEsp'
+import Catalog from './pages/Catalog/Catalogoss';
+import LandingPage from './pages/Landing/LandingPage';
 
 ReactDOM.render(
     <HashRouter>
@@ -20,10 +26,31 @@ ReactDOM.render(
                 </Route>
                 <Route path="/log" >
                     <Log />
-
                 </Route>
+                {/* Landing usuarios */}
+                <Route path="/usuarios">
+                    <LandingPage />
+                </Route>
+                {/* Fin Landing usuarios */}
+                {/* Donaciones */}
+                <Route path="/donacionEconomica/listDonEsp">
+                    <ListDonEsp />
+                </Route>
+                <Route path="/donacionEconomica/listDonEcon">
+                    <ListDonEcon />
+                </Route>
+                <Route path="/donacionEconomica">
+                    <DonacionEconomica />
+                </Route>
+                <Route path="/donacionEspecie">
+                    <DonacionEspecie />
+                </Route>
+                {/* Fin Donaciones */}
                 <Route exact path="/" >
                     <HomePage />
+                </Route>
+                <Route exact path="/catalogoAnimales" component>
+                    <Catalog />
                 </Route>
             </Switch>
         </ScrollToTop>

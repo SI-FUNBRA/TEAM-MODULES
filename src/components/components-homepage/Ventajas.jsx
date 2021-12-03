@@ -105,7 +105,7 @@ const Ventajas = () => {
             <div className="recent-work-header row text-center">
                 <h2 className="col-md-6 m-auto h2 semi-bold-600 py-5">Ventajas</h2>
             </div>
-            <section id="testimonials" className="testimonials py-5 mb-5" style={{'margin': '0 15rem 0 15rem', 'border-radius': '7px', 'background': '#5d55e3'}}>
+            <section id="testimonials" className="testimonials py-5 mb-5" style={{'margin': '0 15rem 0 15rem', 'borderRadius': '7px', 'background': '#5d55e3'}}>
             <div className="container" data-aos="zoom-in">
 
                 <div className="row justify-content-center">
@@ -116,7 +116,7 @@ const Ventajas = () => {
 
                         <div className="swiper-slide mb-4">
                         <div className="testimonial-item">
-                            <a class="filter-btn nav-link active btn-outline-light rounded-pill text-dark px-4 light-600 mb-3" href="#" data-filter=".project">Virtualización</a>
+                            <a className="filter-btn nav-link active btn-outline-light rounded-pill text-dark px-4 light-600 mb-3" href="/" data-filter=".project">Virtualización</a>
                             <h4>Todo desde la comodidad de tu casa</h4>
                             <p className="text-light">
                                 Tan solo con entrar a nuestra página podras acceder a nuestros servicios y contactarnos rapidamente en cualquier situacion.
@@ -127,7 +127,7 @@ const Ventajas = () => {
                         <div className="swiper-slide">
                         <div className="testimonial-item">
 
-                        <a class="filter-btn nav-link active btn-outline-light rounded-pill text-dark px-4 light-600 mb-3" href="#" data-filter=".project">Comodidad</a>
+                        <a class="filter-btn nav-link active btn-outline-light rounded-pill text-dark px-4 light-600 mb-3" href="/" data-filter=".project">Comodidad</a>
                             <h4>Facilidad al Usar</h4>
                             <p className="text-light">
                                 No necesitas saber demaciado o buscar mucho para saber donde puedes encontrar lo que quieres
@@ -138,7 +138,7 @@ const Ventajas = () => {
                         <div className="swiper-slide">
                         <div className="testimonial-item">
 
-                        <a class="filter-btn nav-link active btn-outline-light rounded-pill text-dark px-4 light-600 mb-3" href="#" data-filter=".project">Intuitivo</a>
+                        <a className="filter-btn nav-link active btn-outline-light rounded-pill text-dark px-4 light-600 mb-3" href="/" data-filter=".project">Intuitivo</a>
                             <h4>Interfaces muy explicitas</h4>
                             <p className="text-light">
                             Todo esta a tu alcance, cada apartado es facil de encontrar y siempre tienen un identificador grafico que recordaras muy bien la proxima vez que ingrese.
@@ -148,7 +148,7 @@ const Ventajas = () => {
 
                         <div className="swiper-slide">
                         <div className="testimonial-item">
-                        <a class="filter-btn nav-link active btn-outline-light rounded-pill text-dark px-4 light-600 mb-3" href="#" data-filter=".project">Ayuda</a>
+                        <a className="filter-btn nav-link active btn-outline-light rounded-pill text-dark px-4 light-600 mb-3" href="/" data-filter=".project">Ayuda</a>
                             <h4>your assistant</h4>
                             <p className="text-light">
                             Si tienes problemas con algo, puedes contactarnos llamando a nuestro numero telefonico, escribir a nuestro correo o si es algo relacionado con encontrar algo en la pagina puedes leer el instructivo.
