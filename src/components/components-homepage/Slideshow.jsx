@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import ImageOne from '../../images/ImageOne.jpg';
 import ImageTwo from '../../images/ImageTwo.jpg';
 import ImageThree from '../../images/ImageThree.jpg';
-import ImageFour from '../../images/ImageFour.jpg';
+// import ImageFour from '../../images/ImageFour.jpg';
 
 import { IoArrowForward, IoArrowBack } from 'react-icons/io5';
 import { Buutton } from './Buutton';
@@ -188,7 +188,7 @@ const Slideshow = () => {
               <TextoSlide>
                 <h1>¿Te gustaria donar materiales?</h1>
                 <p>Hoy puedes ser parte de la solución y sostenimiento<br /> de nuestra fundación, brindandonos un apoyo material, generando grandes cambios.</p>
-                <Buutton to='/catalogoAnimales' primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar en Especie</Buutton>
+                <Buutton to='/donacionEspecie' primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar en Especie</Buutton>
               </TextoSlide>
             </Slide>
           </ContenedorSlideshow>

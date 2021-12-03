@@ -1,0 +1,51 @@
+.LSwrapper{
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.LSwrapper h1{
+    margin-top: 30px;
+    text-align: center;
+}
+
+.LSwrapper p{
+    text-align: center;
+    margin-top: 7px;
+    font-weight: bold;
+}
+
+.LSwrapper .LSmain{
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.LSwrapper .LSform-container{
+    width: 500px;
+    height: 340px;
+    background-color: #e4e4e4;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.LSwrapper .LSform-container .LSbtn{
+    width: 100%;
+}
+
+.LSwrapper .LSview-container{
+    width: 600px;
+    background-color: #e4e4e4;
+    margin:20px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.LSdelete-btn{
+    color: red;
+    cursor: pointer;
+}
+
+tbody{
+    margin-top: 25px;
+}

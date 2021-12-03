@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import Donaciones from '../../images/Donaciones.jpg';
+import Landing from '../../images/landing.jpeg';
 
 import { Buutton } from '../components-homepage/Buutton';
 
@@ -44,14 +44,12 @@ const Hero = () => {
     return (
         <HeroSection id='/inicio'>
             <HeroWrapper>
-                <Immg src={Donaciones} alt="Imagen de donaciones"></Immg>
+                <Immg src={Landing} alt="Imagen de donaciones"></Immg>
                 <div className="BotonesDon">
-                    <h1 className="text-end me-5 font-weight-bold">Juntos Podemos Superarlo</h1>
-                    <h2 className="text-end me-5 mb-4">Dona para nuestros animalitos</h2>
-                    <h6 className="text-end me-5">El brote de COVID-19 y la subsiguiente cuarentena de las comunidades<br /> hicieron que muchos animalitos perdieran su hogar. Por eso debemos ayudarles!</h6>
-                    <div className="d-flex justify-content-end me-5 mt-4">
+                    <h1 className="text-center me-5 font-weight-bold">¡BIENVENIDO!</h1>
+                    <h2 className="text-center me-5 mb-4">Nuestra fundacion se complace verte</h2>
+                    <div className="d-flex justify-content-center me-5 mt-4">
                         <Buutton to="/" className="bg-secondary text-light me-4" style={{'display': 'inline-block'}}>Volver al Inicio</Buutton>
-                        <Buutton to="/catalogoAnimales" primary="true" style={{'display': 'inline-block'}}>Adoptar</Buutton>
                     </div>
                 </div>
             </HeroWrapper>

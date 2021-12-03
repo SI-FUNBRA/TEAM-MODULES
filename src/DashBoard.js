@@ -154,7 +154,7 @@ const DashBoard = () => {
             label: 'Principal',
             items: [
                 {
-                    label:'Inicio', icon: 'pi pi-fw pi-home', to:'/dash/inicio'
+                    label:'Inicio', icon: 'pi pi-fw pi-home', to:'/dash'
                 }
             ]
         },
