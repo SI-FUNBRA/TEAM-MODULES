@@ -8,6 +8,10 @@ export class ServicioCredencial {
         return axios.post(`${URL}/login`,data)
     }
 
+    ChangeRol(data){
+        return axios.post(`${URL}/change-rol`,data)
+    }
+
     register(data){
         return axios.post(`${URL}/register`, data)
     }

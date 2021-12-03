@@ -146,6 +146,7 @@ const DashBoard = () => {
     }
 
     const optionsMenuFun = new DashMenuOptions()
+
     const menu = optionsMenuFun.optionsMenu(userLog.Rol)
 
     const addClass = (element, className) => {

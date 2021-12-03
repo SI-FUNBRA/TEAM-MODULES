@@ -6,9 +6,9 @@ import { Dialog } from 'primereact/dialog';
 import './DashTopbar.css'
 import { ServicioUsu } from './service/ServicioUsu';
 import { Button } from 'primereact/button';
+import { ServicioCredencial } from './service/ServicioCredencial';
 
 export const DashTopbar = (props) => {
-
     const history = new useHistory()
 
     const [infoTopBar, setInfoTopBar] = useState({
@@ -23,6 +23,8 @@ export const DashTopbar = (props) => {
         })
 
     }, [])
+
+    const serviCredencial = new ServicioCredencial()
 
     const showDialogRoles = () =>{
         setDialogRoles(true)
@@ -90,6 +92,13 @@ export const DashTopbar = (props) => {
         menu.current.toggle(event);
     };
 
+    const rolChange = (idRol) =>{
+        serviCredencial.ChangeRol({rolChange:idRol}).then(res=>{
+            console.log(res.data.success)
+            localStorage.setItem('token', res.data.success)
+            window.location.reload();
+        }).catch(()=>{})
+    }
 
     return (
         <div className="layout-topbar">
@@ -118,14 +127,14 @@ export const DashTopbar = (props) => {
 
                 <Dialog className="col-10 md:col-6 xl:col-5" position="top" visible={dialogRoles} header="Selecciona El Rol" modal onHide={hideDialogRoles}>
                         <div className="text-center d-none d-xl-block">
-                            <Button icon="pi pi-user" label="Administrador" className="p-button-rounded p-button-primary ml-2" />
-                            <Button icon="pi pi-cog" label="Gerente" className="p-button-rounded p-button-secondary ml-2" />
-                            <Button icon="pi pi-info" label="Participante" className="p-button-rounded p-button-warning ml-2" />
+                            <Button onClick={()=>rolChange(1)} icon="pi pi-user" label="Administrador" className="p-button-rounded p-button-primary ml-2" />
+                            <Button onClick={()=>rolChange(2)} icon="pi pi-cog" label="Gerente" className="p-button-rounded p-button-secondary ml-2" />
+                            <Button onClick={()=>rolChange(3)} icon="pi pi-info" label="Participante" className="p-button-rounded p-button-warning ml-2" />
                         </div>
                         <div className="text-center d-block d-xl-none">
-                            <Button tooltip="Administrador" icon="pi pi-user" className="p-button-rounded p-button-primary ml-2" />
-                            <Button tooltip="Gerente" icon="pi pi-cog" className="p-button-rounded p-button-secondary mx-4" />
-                            <Button tooltip="Participante" icon="pi pi-info" className="p-button-rounded p-button-warning ml-2" />
+                            <Button onClick={()=>rolChange(1)} tooltip="Administrador" icon="pi pi-user" className="p-button-rounded p-button-primary ml-2" />
+                            <Button onClick={()=>rolChange(2)} tooltip="Gerente" icon="pi pi-cog" className="p-button-rounded p-button-secondary mx-4" />
+                            <Button onClick={()=>rolChange(3)} tooltip="Participante" icon="pi pi-info" className="p-button-rounded p-button-warning ml-2" />
                         </div>
                 </Dialog>
         </div>
