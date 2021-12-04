@@ -20,7 +20,6 @@ function Card({ title, genero, imageSource, edad, description, url }) {
         </p>
         <a
           href={url ? url : "#!"}
-          target="_blank"
           className="btn border-0 text-light"
           style={{'background': '#11B3C9'}}
           rel="noreferrer"

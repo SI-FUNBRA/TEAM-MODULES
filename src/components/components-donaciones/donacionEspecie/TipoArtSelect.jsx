@@ -11,11 +11,11 @@ const TipoArtSelectSection=styled.section`
         outline:none;
         border-radius:3px;
     }
-        
+
 `;
 
 const TipoArtSelect = ({nameForm, valor, handChangeModal}) => {
-    
+
     const URL='http://localhost:3005/api/tipoArticuloDonado';
 
     const getData=async()=>{
@@ -26,11 +26,9 @@ const TipoArtSelect = ({nameForm, valor, handChangeModal}) => {
     const [listTipoArt, setListTipoArt]=useState([]);
 
     useEffect(() => {
-        if(!listTipoArt[0]){
             getData().then((response)=>{
                 setListTipoArt(response.data);
             })
-        }
     }, [])
 
     const [seleccionadoTipoArt, setSeleccionadoTipoArt]=useState({valor:valor});
@@ -39,7 +37,7 @@ const TipoArtSelect = ({nameForm, valor, handChangeModal}) => {
         setSeleccionadoTipoArt({ valor:target.value })
         handChangeModal( {target} )
     }
-    
+
     return (
         <TipoArtSelectSection>
             <select name={nameForm} id={nameForm} onChange={handleChange} value={seleccionadoTipoArt.valor} required>

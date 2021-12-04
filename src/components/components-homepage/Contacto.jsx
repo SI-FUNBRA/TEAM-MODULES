@@ -575,8 +575,8 @@ const Contacto = () => {
 
 
                   <div className="wrap-input100 validate-input" data-validate="Name is required">
-                    <label className="label-input100" for="name">Ingrese su nombre <p className="text-danger d-inline">*</p></label>
-                    <input id="name" class="input100" type="text" name="name" placeholder="Ej: Camila Cruz" onChange={handleChange} onBlur={handleBlur} value={form.name} />
+                    <label className="label-input100" htmlFor="name">Ingrese su nombre <p className="text-danger d-inline">*</p></label>
+                    <input id="name" className="input100" type="text" name="name" placeholder="Ej: Camila Cruz" onChange={handleChange} onBlur={handleBlur} value={form.name} />
                     <span className="focus-input100"></span>
                     <hr />
                     {errors.name&&<p className="mx-3 text-danger font-weight-bold">{errors.name}</p>}
@@ -585,8 +585,8 @@ const Contacto = () => {
 
 
                   <div className="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                    <label className="label-input100" for="email">Ingrese su Correo Electronico <p className="text-danger d-inline">*</p></label>
-                    <input id="email" class="input100" type="text" name="email" placeholder="Ej: example@dominio.com" onChange={handleChange} onBlur={handleBlur} value={form.email} />
+                    <label className="label-input100" htmlFor="email">Ingrese su Correo Electronico <p className="text-danger d-inline">*</p></label>
+                    <input id="email" className="input100" type="text" name="email" placeholder="Ej: example@dominio.com" onChange={handleChange} onBlur={handleBlur} value={form.email} />
                     <span className="focus-input100"></span>
                     <hr />
                     {errors.email&&<p className="mx-3 text-danger font-weight-bold">{errors.email}</p>}
@@ -595,15 +595,15 @@ const Contacto = () => {
                   <hr />
 
                   <div className="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                    <label className="label-input100" for="email">Asunto </label>
-                    <input id="subject" class="input100" type="text" name="subject" placeholder="Ej: Problema Donación" onChange={handleChange} onBlur={handleBlur} value={form.subject} />
+                    <label className="label-input100" htmlFor="email">Asunto </label>
+                    <input id="subject" className="input100" type="text" name="subject" placeholder="Ej: Problema Donación" onChange={handleChange} onBlur={handleBlur} value={form.subject} />
                     <span className="focus-input100"></span>
                     <hr />
                     {errors.subject&&<p className="mx-3 text-danger font-weight-bold">{errors.subject}</p>}
                   </div>
 
                   <div className="wrap-input100 validate-input" data-validate = "Message is required">
-                    <label className="label-input100" for="message">Ingrese su Mensaje <p className="text-danger d-inline">*</p></label>
+                    <label className="label-input100" htmlFor="message">Ingrese su Mensaje <p className="text-danger d-inline">*</p></label>
                     <textarea id="message" className="input100" name="message" placeholder="Escribe el texto aqui..." onChange={handleChange} onBlur={handleBlur} value={form.message}></textarea>
                     <span className="focus-input100"></span>
                     <hr />

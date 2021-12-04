@@ -6,11 +6,14 @@ import {Button} from "primereact/button";
 
 export const DashConfig = (props) => {
 
+    let colorInicio = () =>  localStorage.getItem('color')
+    let temaInicio = () =>  (localStorage.getItem('tema'))?localStorage.getItem('tema'):'saga'
+
     const [active, setActive] = useState(false);
     const [scale, setScale] = useState(16);
     const [scales] = useState([12,13,14,15,16]);
     const [themeScheme, setThemeScheme] = useState('saga');
-    const [themeColor, setThemeColor] = useState('blue');
+    const [themeColor, setThemeColor] = useState(colorInicio);
     const config = useRef(null);
     let outsideClickListener = useRef(null);
 
@@ -113,11 +116,13 @@ export const DashConfig = (props) => {
 
     const changeThemeScheme = (e, theme) => {
         props.onColorModeChange(e.value);
-        setThemeScheme(theme);
+        setThemeScheme(theme);/*
+        localStorage.setItem('color', theme) */
     }
 
     const changeThemeColor = (e, color) => {
         setThemeColor(color);
+        localStorage.setItem('color', color)
     }
 
     return (
@@ -128,7 +133,7 @@ export const DashConfig = (props) => {
             <Button className="p-button-danger layout-config-close p-button-rounded p-button-text" icon="pi pi-times" onClick={hideConfigurator}/>
 
             <div className="layout-config-content">
-                <h6 className="mt-0">Component Scale</h6>
+                <h6 className="mt-0">Tamaño</h6>
                 <div className="config-scale">
                     <Button icon="pi pi-minus" onClick={decrementScale} className="p-button-text" disabled={scale === scales[0]} />
                     {
@@ -139,39 +144,36 @@ export const DashConfig = (props) => {
                     <Button icon="pi pi-plus" onClick={incrementScale} className="p-button-text" disabled={scale === scales[scales.length - 1]} />
                 </div>
 
-                <h6>Input Style</h6>
+                <h6>Cuadros De Texto</h6>
                 <div className="p-formgroup-inline">
                     <div className="field-radiobutton">
                         <RadioButton inputId="input_outlined" name="inputstyle" value="outlined" onChange={(e) => props.onInputStyleChange(e.value)} checked={props.inputStyle === 'outlined'} />
-                        <label htmlFor="input_outlined">Outlined</label>
+                        <label htmlFor="input_outlined">Delineado</label>
                     </div>
                     <div className="field-radiobutton">
                         <RadioButton inputId="input_filled" name="inputstyle" value="filled" onChange={(e) => props.onInputStyleChange(e.value)} checked={props.inputStyle === 'filled'} />
-                        <label htmlFor="input_filled">Filled</label>
+                        <label htmlFor="input_filled">Relleno</label>
                     </div>
                 </div>
 
-                <h6>Ripple Effect</h6>
-                <InputSwitch checked={props.rippleEffect} onChange={props.onRippleEffect} />
-
-                <h6>Color Scheme</h6>
+                <h6>Color Fondo</h6>
                 <div className="p-formgroup-inline">
                     <div className="field-radiobutton">
                         <RadioButton inputId="light" name="layoutColorMode" value="light" onChange={e => changeThemeScheme(e, 'saga')} checked={props.layoutColorMode === 'light'} />
-                        <label htmlFor="light">Light</label>
+                        <label htmlFor="light">Claro</label>
                     </div>
                     <div className="field-radiobutton">
                         <RadioButton inputId="dim" name="layoutColorMode" value="dim" onChange={e => changeThemeScheme(e, 'vela')} checked={props.layoutColorMode === 'dim'} />
-                        <label htmlFor="dark">Dim</label>
+                        <label htmlFor="dark">Profundo</label>
                     </div>
                     <div className="field-radiobutton">
                         <RadioButton inputId="dark" name="layoutColorMode" value="dark" onChange={e => changeThemeScheme(e, 'arya')} checked={props.layoutColorMode === 'dark'} />
-                        <label htmlFor="dark">Dark</label>
+                        <label htmlFor="dark">Oscuro</label>
                     </div>
                 </div>
 
 
-                <h6>Primary Color</h6>
+                <h6>Color Primario</h6>
                 <div className="flex">
                     <div style={{width: '2rem', height: '2rem', borderRadius:'6px'}} className="bg-blue-500 mr-3 cursor-pointer" onClick={e => changeThemeColor(e, 'blue')}/>
                     <div style={{width: '2rem', height: '2rem', borderRadius:'6px'}} className="bg-green-500 mr-3 cursor-pointer" onClick={e => changeThemeColor(e, 'green')}/>

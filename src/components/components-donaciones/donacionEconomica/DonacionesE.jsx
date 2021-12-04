@@ -107,7 +107,7 @@ const DonacionesE = () => {
             <HeroHeading>Donación Economica</HeroHeading>
             <span>Para realizar donaciones económicas puedes hacerlo por los siguientes medios:</span>
             <div className="payMoney">
-                <label for="pay">Ingrese el valor de la donación <span className="text-danger d-inline">*</span> </label><br />
+                <label htmlFor="pay">Ingrese el valor de la donación <span className="text-danger d-inline">*</span> </label><br />
                 <input type="number" className="pay" name="pay" value={pay} id="pay" onChange={(e) =>setPay(e.target.value)} onBlur={handleBlurPay} />
 
                 {errors.pay&&<span className="text-start text-danger ">{errors.pay}</span>}

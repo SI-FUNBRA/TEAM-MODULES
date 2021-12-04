@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { useFormik } from 'formik';
 import { InputText } from 'primereact/inputtext';
@@ -9,8 +9,11 @@ import { Divider } from "primereact/divider";
 import { Tooltip } from 'primereact/tooltip';
 import { useHistory } from 'react-router';
 import { ServicioCredencial } from '../../service/ServicioCredencial';
+import { Toast } from 'primereact/toast';
 
 export const LogPopup = (props) => {
+
+    const toast = useRef(null);
 
     const serviCredencial = new ServicioCredencial()
 
@@ -50,7 +53,7 @@ export const LogPopup = (props) => {
                     localStorage.setItem('token', res.data.success)
                     props.hideDialog()
                 }else{
-                    props.toast.current.show({ severity: 'error', summary: 'Error', detail: res.data.error, life: 3000 });
+                    toast.current.show({ severity: 'error', summary: 'Error', detail: res.data.error, life: 3000 });
                 }
             }).catch(err=>{
                 console.log(err)
@@ -131,6 +134,8 @@ export const LogPopup = (props) => {
                 <div className="flex align-items-center justify-content-center">
                     <Button onClick={handleRegistrarse} label="Registrarse" icon="pi pi-user-plus" style={{backgroundColor:'var(--green-300)', border:'var(--green-300)'}} ></Button>
                 </div>
+
+                <Toast ref={toast} position="bottom-right"/>
 
             </div>
     );

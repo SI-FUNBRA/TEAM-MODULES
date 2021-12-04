@@ -1,25 +1,18 @@
 import { Button } from 'primereact/button'
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview'
-import { Dropdown } from 'primereact/dropdown'
 import { Divider } from 'primereact/divider'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ServicioRolUsu } from '../../service/ServiocioRolUsu'
 import { Dialog } from 'primereact/dialog'
+import { Toast } from 'primereact/toast'
 
 const Permisos = () => {
+    const toast = useRef(null);
 
     const [rolesUsus, setRolesUsus] = useState([])
     const [layout, setLayout] = useState('grid');
-    const [sortKey, setSortKey] = useState(null);
-    const [sortOrder, setSortOrder] = useState(null);
-    const [sortField, setSortField] = useState(null);
 
     const [usuRol, setUsuRol] = useState({})
-
-    const sortOptions = [
-        { label: 'Price High to Low', value: '!price' },
-        { label: 'Price Low to High', value: 'price' }
-    ];
 
     const serviRolUsu = new ServicioRolUsu()
 
@@ -28,7 +21,6 @@ const Permisos = () => {
     useEffect(() => {
         const serviRolUsu = new ServicioRolUsu()
         serviRolUsu.getUsuariosRol().then(res=>{
-            console.log(res)
             let rolesXUsu = []
             let elid = 0
             if(res.data){
@@ -43,34 +35,16 @@ const Permisos = () => {
                     rolesXUsu.push(objeto)
                 }
             });
-            console.log(rolesXUsu)
             setRolesUsus(rolesXUsu)
             }
         }).catch(()=>{})
     }, [estado])
 
-    const onSortChange = (event) => {
-        const value = event.value;
-        console.log(event)
-        if (value.indexOf('!') === 0) {
-            setSortOrder(-1);
-            setSortField(value.substring(1, value.length));
-            setSortKey(value);
-        }
-        else {
-            setSortOrder(1);
-            setSortField(value);
-            setSortKey(value);
-        }
-    };
 
 
     const dataviewHeader = (
         <div className="grid grid-nogutter">
-            <div className="col-6" style={{ textAlign: 'left' }}>
-                <Dropdown value={sortKey} options={sortOptions} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} />
-            </div>
-            <div className="col-6" style={{ textAlign: 'right' }}>
+            <div className="col-12" style={{ textAlign: 'right' }}>
                 <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
             </div>
         </div>
@@ -99,7 +73,7 @@ const Permisos = () => {
     const borrarRol = () =>{
         let funcion = () =>{
             serviRolUsu.deleteUsuarioRol({idUsuario:userRolDelet.usu.idUsuario, idRol:userRolDelet.idRol}).then(res=>{
-            console.log("nice")
+                toast.current.show({ severity: 'success', summary: 'Todo bien', detail: res.data.success, life: 3000 });
             })}
         showDialogConfirm(()=>funcion)
     }
@@ -190,7 +164,6 @@ const Permisos = () => {
     const [dialog, setDialog] = useState(false)
 
     const showDialog = (data) =>{
-        console.log(data)
         setUsuRol(data)
         setDialog(true)
     }
@@ -201,7 +174,7 @@ const Permisos = () => {
     const addRol = (idUsu, idRol) =>{
         let funcion = ()=>{
                 serviRolUsu.newUsuarioRol({idUsuario:idUsu, idRol:idRol}).then(res=>{
-                    console.log("nice")
+                    toast.current.show({ severity: 'success', summary: 'Todo bien', detail: res.data.success, life: 3000 });
                 })
             }
         showDialogConfirm(()=>funcion)
@@ -249,7 +222,7 @@ const Permisos = () => {
             <div className="col-12">
                 <div className="card">
                     <h5>Gestion De Roles</h5>
-                    <DataView value={rolesUsus} layout={layout} paginator rows={9} sortOrder={sortOrder} sortField={sortField} itemTemplate={itemTemplate} header={dataviewHeader}></DataView>
+                    <DataView value={rolesUsus} layout={layout} paginator rows={9} itemTemplate={itemTemplate} header={dataviewHeader}></DataView>
                 </div>
             </div>
 
@@ -266,7 +239,7 @@ const Permisos = () => {
                 </div>
             </Dialog>
 
-            <Dialog className="col-6" footer={deleteDialogFooter} header={`Quitar a ${userRolDelet.usu.nombreUsuario} el rol:`} visible={dialogDelete}  onHide={hideDialogDelete}>
+            <Dialog className="col-10 xl:col-6" footer={deleteDialogFooter} header={`Quitar a ${userRolDelet.usu.nombreUsuario} el rol:`} visible={dialogDelete}  onHide={hideDialogDelete}>
                 <div className="text-center">
                     {userRolDelet.idRol===1 && <Button disabled icon="pi pi-user" label="Administrador" className="p-button-rounded p-button-primary ml-2" />}
                     {userRolDelet.idRol===2 && <Button disabled icon="pi pi-cog" label="Gerente" className="p-button-rounded p-button-secondary ml-2" />}
@@ -280,6 +253,9 @@ const Permisos = () => {
                     <span>¿Está seguro de realizar esta acción?</span>
                 </div>
             </Dialog>
+
+            <Toast ref={toast} position="bottom-right"/>
+
         </div>
 
 

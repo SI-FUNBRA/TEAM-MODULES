@@ -264,7 +264,6 @@ const DonacionesEE = () => {
 
     const[dataa, setDataa]=useState(getDatafromDE())
 
-    const [tipoArticuloDonado, setTipoArticuloDonado]=useState('');
     const [nombreArticuloDonado, setNombreArticuloDonado]=useState('');
     const [cantidadArticuloDonado, setCantidadArticuloDonado]=useState('');
 
@@ -301,6 +300,7 @@ const DonacionesEE = () => {
         e.preventDefault();
 
         console.log(dataSolDonEsp);
+        console.log(dataa);
 
         axios.post(URL, dataSolDonEsp).then((res)=>{
             if(res.status===201){
@@ -418,7 +418,7 @@ const DonacionesEE = () => {
                             </DEFormContent>
                         </DEFormWrap>
                     </DESection>
-                    <Buutton className="mx-5" to='/donacionEconomica/listDonEsp' primary='true' style={{'margin-top':'1.5rem'}}>Ir</Buutton>
+                    <Buutton className="mx-5" to='/donacionEconomica/listDonEsp' primary='true' style={{'marginTop':'1.5rem'}}>Ir</Buutton>
                 </ColumnLeft>
                 <ColumnRight className={estado}>
                         <DEFormTwo action='' onSubmit={handleProducto}>

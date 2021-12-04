@@ -57,7 +57,7 @@ const Homepage = () => {
             <GlobalStyle />
             <Navbar toggle={toggle} />
             <Dropdown isOpen={isOpen} toggle={toggle} />
-            <Slideshow />
+            <Slideshow showDialog={showDialog}/>
             <AcercaDe {...InfoData} />
             <Modulos showDialog={showDialog}/>
             <Funcionalidades {...InfoDataTwo} />
@@ -77,10 +77,10 @@ const Homepage = () => {
                 'borderRadius': '5px 5px 0 0'
             }} />
 
+
             <Dialog className="col-11 d-sm-4 md:col-6 xl:col-5" visible={dialogLogin} header="Para Continuar:" modal onHide={hideDialog}>
                 <LogPopup hideDialog={hideDialog}/>
             </Dialog>
-
         </>
     );
 };

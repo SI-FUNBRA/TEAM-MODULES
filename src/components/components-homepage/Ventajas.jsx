@@ -127,7 +127,7 @@ const Ventajas = () => {
                         <div className="swiper-slide">
                         <div className="testimonial-item">
 
-                        <a class="filter-btn nav-link active btn-outline-light rounded-pill text-dark px-4 light-600 mb-3" href="/" data-filter=".project">Comodidad</a>
+                        <a className="filter-btn nav-link active btn-outline-light rounded-pill text-dark px-4 light-600 mb-3" href="/" data-filter=".project">Comodidad</a>
                             <h4>Facilidad al Usar</h4>
                             <p className="text-light">
                                 No necesitas saber demaciado o buscar mucho para saber donde puedes encontrar lo que quieres

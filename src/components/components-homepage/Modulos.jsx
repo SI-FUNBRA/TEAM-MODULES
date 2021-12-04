@@ -45,7 +45,7 @@ const Modulos = (props) => {
                         <div className="col-md-4 mb-3">
                             <button onClick={()=>props.showDialog('/donacionEspecie')} className="recent-work card border-0 shadow-lg overflow-hidden">
                                 <img className="recent-work-img card-img" src={rw03} alt="Card image3" />
-                                <div class="recent-work-vertical card-img-overlay d-flex align-items-end">
+                                <div className="recent-work-vertical card-img-overlay d-flex align-items-end">
                                     <div className="recent-work-content text-start mb-3 ml-3 text-dark">
                                         <h3 className="card-title light-300">Donaciones Especie</h3>
                                         <p className="card-text">Por último se encuentra el módulo de participaciónes dónde si eres una persona que le interesa mucho nuestra causa te puedes unir y trabajar con nosotros para que más animalitos no sigan en más calles.</p>

@@ -8,8 +8,7 @@ import ImageThree from '../../images/ImageThree.jpg';
 // import ImageFour from '../../images/ImageFour.jpg';
 
 import { IoArrowForward, IoArrowBack } from 'react-icons/io5';
-import { Buutton } from './Buutton';
-
+import { Button } from 'primereact/button'
 
 const ContenedorPrincipal=styled.div`
   position:relative;
@@ -93,7 +92,7 @@ const NextArrow=styled(IoArrowForward)`
     ${Boton}
 `;
 
-const Slideshow = () => {
+const Slideshow = (porps) => {
 
     const slideshow=useRef(null);
 
@@ -161,36 +160,39 @@ const Slideshow = () => {
     return (
         <ContenedorPrincipal  id='/inicio'>
           <ContenedorSlideshow ref={slideshow}>
+
             <Slide>
-              <a href="/">
+
                 <img src={ImageOne} alt="DonacionEcon" />
-              </a>
+
               <TextoSlide>
                 <h1>¿Te gustaria Donar?</h1>
                 <p>En nuestra fundación te agradecemos por tu colaboración<br /> es muy importante para tanto nosotros como para nuestros animalitos.</p>
-                <Buutton to='/donacionEconomica' primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar</Buutton>
+                <Button  onClick={()=>porps.showDialog("/donacionEconomica")} primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar</Button>
               </TextoSlide>
             </Slide>
+
             <Slide>
-              <a href="/">
+
                 <img src={ImageTwo} alt="Adoptar" />
-              </a>
+
               <TextoSlide>
                 <h1>¿Te gustaria Adoptar?</h1>
                 <p>Primero debes loguearte para poder ver algunas<br /> fotografias de nuestros animalitos.</p>
-                <Buutton to='/catalogoAnimales' primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Ver Animalitos</Buutton>
+                <Button  onClick={()=>porps.showDialog('/catalogoAnimales')} primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Ver Animales</Button>
               </TextoSlide>
             </Slide>
             <Slide>
-              <a href="/">
+
                 <img src={ImageThree} alt="DonarEspecie" />
-              </a>
+
               <TextoSlide>
                 <h1>¿Te gustaria donar materiales?</h1>
                 <p>Hoy puedes ser parte de la solución y sostenimiento<br /> de nuestra fundación, brindandonos un apoyo material, generando grandes cambios.</p>
-                <Buutton to='/donacionEspecie' primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar en Especie</Buutton>
+                <Button  onClick={()=>porps.showDialog('/donacionEspecie')} primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar en Especie</Button>
               </TextoSlide>
             </Slide>
+
           </ContenedorSlideshow>
             <Controles>
                 <Boton onClick={Anterior}>
