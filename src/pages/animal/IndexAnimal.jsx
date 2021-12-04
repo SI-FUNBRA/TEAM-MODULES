@@ -14,7 +14,10 @@ import { ServicioAnimal } from '../../service/ServicioAnimal';
 import SelectTratamiento from '../../components/selectTratamiento/selectTratamiento';
 import SelectTipoAnimal from '../../components/selectTipoAnimal/selectTipoAnimal';
 import SelectEnfermedad from '../../components/selectEnfermedad/SelectEnfermedad';
+import SelectFotografia from '../../components/fotografia/selectFotografia';
 import { Dropdown } from 'primereact/dropdown';
+import { RadioButton } from 'primereact/radiobutton';
+
 
 const IndexAnimal = () => {
 let today = new Date()
@@ -29,7 +32,6 @@ let emptyAnimal = {
     idEnfermedad_FK:'',
     idTratamiento_FK:'',
     estadoAnimal:'',
-    fotografia: '',
     Enfermedad:{
         nombreEnfermedad:''
     },
@@ -38,6 +40,9 @@ let emptyAnimal = {
     },
     TipoAnimal:{
         nombreTipoAnimal:''
+    },
+    Fotografia:{
+        urlFotografia:''
     }
 };
 
@@ -122,7 +127,7 @@ const saveAnimal = () => {
             setEstado(!estado)
         }
         else {
-            servicioAnimal.createUsuario(animal).then(res=>{
+            servicioAnimal.createAnimal(animal).then(res=>{
                 //Mensaje de exito :D
                 toast.current.show({ severity: 'success', summary: 'Todo Bien', detail: `El animal ${animal.nombreAnimal} A sido Creado Con Exito`, life: 3000 });
             })
@@ -279,7 +284,7 @@ const changeState = () => {
         return (
             <>
                 <span className="p-column-title">Fotografía</span>
-                {rowData.fotografia}
+                {rowData.animal.Fotografia.urlFotografia}
             </>
         )
     }
@@ -371,12 +376,12 @@ const changeState = () => {
                         <div className="formgrid grid">
                             <div className="field col">
                                 <label htmlFor="nombreAnimal">Nombre: </label>
-                                <InputText id="nombreAnimal" value={animal.nombreAnimal} onChange={(e) => onInputChange(e, 'nombreAnimal')} required autoFocus className={classNames({ 'p-invalid': submitted && !animal.nombreAnimal })} />
+                                <InputText id="nombreAnimal" style={{textTransform:'lowercase'}} value={animal.nombreAnimal} onChange={(e) => onInputChange(e, 'nombreAnimal')} required autoFocus className={classNames({ 'p-invalid': submitted && !animal.nombreAnimal })} />
                                 {submitted && !animal.nombreAnimal && <small className="p-invalid">Se Requiere El Nombre</small>}
                             </div>
                             <div className="field col">
                                 <label htmlFor="edad">Edad: </label>
-                                <InputText id="edad" value={animal.edad} onChange={(e) => onInputChange(e, 'edad')} required className={classNames({ 'p-invalid': submitted && !animal.edad })} />
+                                <InputText id="edad" value={animal.edad} style={{textTransform:'lowercase'}} onChange={(e) => onInputChange(e, 'edad')} required className={classNames({ 'p-invalid': submitted && !animal.edad })} />
                                 {submitted && !animal.edad && <small className="p-invalid">Se Requiere Llenar este campo</small>}
                             </div>
                         </div>
@@ -392,37 +397,42 @@ const changeState = () => {
                                 </div>
                             }
                             <div className="field col">
-                                <label>Motivo de Llegada</label>
-                                <Dropdown value={animal.motivoLlegada} options={'abandono, enfermedad, condición de calle'} onChange={(e) => onInputChange(e, 'motivoLlegada')}/>
+                                <label>Motivo de Llegada:</label>
+                                <RadioButton value="abandonado" name="motivo" inputId="1" setValue={animal.motivoLlegada} onChange={(e) => onInputChange(e, 'motivoLlegada')}/>
+                                <label htmlFor="1">Abandonado</label>
+                                <RadioButton value="maltrato" name="motivo" inputId="2" setValue={animal.motivoLlegada} onChange={(e) => onInputChange(e, 'motivoLlegada')}/>
+                                <label htmlFor="2">Maltrato</label>
+                                <RadioButton value="enfermedad" name="motivo" inputId="3" setValue={animal.motivoLlegada} onChange={(e) => onInputChange(e, 'motivoLlegada')}/>
+                                <label htmlFor="3">Enfermedad</label>
                             </div>
 
                         </div>
 
                         <div className="field">
-                            <label htmlFor="genero">Correo</label>
-                            <Dropdown id="genero" value={animal.genero} onChange={(e) => onInputChange(e, 'genero')} required className={classNames({ 'p-invalid': submitted && !animal.genero })} />
+                            <label htmlFor="genero"></label>
+                            <RadioButton id="genero" value={animal.genero} onChange={(e) => onInputChange(e, 'genero')} required className={classNames({ 'p-invalid': submitted && !animal.genero })} />
                             {submitted && !animal.genero && <small className="p-invalid">Se requiere seleccionar una opción</small>}
                         </div>
 
                         <div className="formgrid grid">
                             <div className="field col">
-                                <label htmlFor="tipoAnimal"> Tipo de animal</label>
-                                <SelectTipoAnimal idTratamiento={animal.idTipoAnimal_FK} onInputChange={onInputChange}/>
+                            <label htmlFor="tipoAnimal"></label>
+                                <SelectTipoAnimal idTipoAnimal={animal.TipoAnimal.nombreTipoAnimal} onInputChange={onInputChange}/>
                             </div>
                             <div className="field col">
-                                <label htmlFor="enfermedad">Enfermedad</label>
+                                <label htmlFor="enfermedad"></label>
                                 <SelectEnfermedad idEnfermedad={animal.idEnfermedad_FK} onInputChange={onInputChange}/>
                             </div>
                             <div className="field col">
-                                <label htmlFor="tratamiento">Tratamiento</label>
+                                <label htmlFor="tratamiento"></label>
                                 <SelectTratamiento idTratamiento={animal.idTratamiento_FK} onInputChange={onInputChange}/>
                             </div>
                         </div>
 
                         <div className="formgrid grid">
                             <div className="field col">
-                                <label htmlFor="fotografia">Fotografía</label>
-                                <FileUpload value={animal.fotografia} onInputChange={onInputChange}/>
+                            <SelectFotografia inputId="idFotografia" idFotografia={animal.Fotografia.urlFotografia} onInputChange={onInputChange} />
+                                <label htmlFor="idFotografia"></label>
                             </div>
                         </div>
                         </form>

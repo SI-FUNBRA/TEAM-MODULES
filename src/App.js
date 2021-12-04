@@ -45,6 +45,8 @@ import IndexAnimal from './pages/animal/IndexAnimal';
 import IndexTipoAnimal from './pages/tipoAnimal/IndexTipoAnimal';
 import IndexEnfermedad from './pages/enfermedad/IndexEnfermedad';
 import IndexTratamiento from './pages/tratamiento/IndexTratamiento';
+import IndexFotografia from './pages/fotografia/IndexFotografia';
+import IndexDocumento from './pages/documentoAdopcion/IndexDocumento';
 
 
 const App = () => {
@@ -166,10 +168,12 @@ const App = () => {
             items: [
                 {label:'Usuarios', icon:'pi pi-fw pi-users', to:'/usuarios'},
                 {label:'Solicitudes de adopción', icon:'pi pi-fw pi-file', to:'/solicitudesAdopcion'},
+                {label:'Documentos de solicitudes de adopción', icon:'pi pi-fw pi-file', to:'/documentoSolicitud'},
                 {label:'Animales', icon:'pi pi-fw pi-twitter', to:'/animal'},
                 {label:'Tipos de animal', icon:' pi-fw pi-th-large', to:'/tipoAnimal'},
                 {label:'Enfermedades', icon:'pi pi-fw pi-clone', to:'/enfermedad'},
-                {label:'Tratamientos', icon:'pi pi-fw pi-heart', to:'/tratamiento'}
+                {label:'Tratamientos', icon:'pi pi-fw pi-heart', to:'/tratamiento'},
+                {label:'Fotografia', icon:'pi pi-fw pi-heart', to:'/fotografia'}
             ]
         },
         {
@@ -310,6 +314,9 @@ const App = () => {
                     <Route path="/solicitudesAdopcion" exact>
                     <IndexSolicitud/>
                     </Route>
+                    <Route path="/documentoSolicitud" exact>
+                    <IndexDocumento/>
+                    </Route>
                     <Route path="/animal" exact>
                     <IndexAnimal/>
                     </Route>
@@ -322,6 +329,10 @@ const App = () => {
                     <Route path="/tratamiento" exact>
                     <IndexTratamiento/>
                     </Route>
+                    <Route path="/fotografia" exact>
+                    <IndexFotografia/>
+                    </Route>
+
 
                     {/* Plantilla */}
                     <Route path="/" exact component={Dashboard}/>

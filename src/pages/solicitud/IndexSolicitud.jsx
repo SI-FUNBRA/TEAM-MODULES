@@ -12,7 +12,8 @@ import { Card } from 'primereact/card';
 import { FileUpload } from 'primereact/fileupload';
 import { ServicioSolicitudAdopcion } from '../../service/ServicioSolicitudAdopcion';
 import SelectAnimal from '../../components/selectAnimal/selectAnimal';
-import SelectUsuario from '../../components/selectUsuario/SelectUsuario'
+import SelectUsuario from '../../components/selectUsuario/SelectUsuario';
+import SelectDocumento from '../../components/documentoAdopcion/selectDocumento';
 import { Dropdown } from 'primereact/dropdown';
 
 
@@ -22,9 +23,9 @@ let today = new Date()
 let emptySolicitud = {
     idSolicitudAdopcion: null,
     fechaSolicitud: '',
-    documentoSolicitud: '',
     idUsuario_FK: '',
     idAnimal_FK: '',
+    idDocumentoSolicitud_FK:'',
     Usuario:{
         nombreUsuario:'',
         apellidoUsuario: '',
@@ -33,6 +34,9 @@ let emptySolicitud = {
     Animal:{
         nombreAnimal:''
     },
+    DocumentoSolicitud: {
+        urlDocumento: ""
+    }
 };
 
 const [solicitudes, setSolicitudes] = useState(null);
@@ -247,8 +251,8 @@ const changeState = () => {
     const documentoBodyTemplate = (rowData) => {
         return (
             <>
-                <span className="p-column-title">Fotografía</span>
-                {rowData.documentoSolicitud}
+                <span className="p-column-title">Documento</span>
+                {rowData.DocumentoSolicitud.urlDocumento}
             </>
         )
     }
@@ -331,13 +335,13 @@ const changeState = () => {
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="Registros {first} a {last} de un total de {totalRecords}"
                         globalFilter={globalFilter} emptyMessage="No se encontro ningun registro." header={header}>
-                        <Column body={documentoBodyTemplate}></Column>
                         <Column field="fechaSolicitud" header="Fecha de la solicitud" sortable body={fechaSolicitudBodyTemplate}></Column>
                         <Column field="Usuario.nombreUsuario" header="Nombre del adoptante" sortable body={nombreUsuarioBodyTemplate}></Column>
                         <Column field="Usuario.apellidoUsuario" header="Apellido del adoptante" sortable body={apellidoUsuarioBodyTemplate}></Column>
                         <Column field="Usuario.documentoUsuario" header="Documento del adoptante" sortable body={documentoUsuarioBodyTemplate}></Column>
                         <Column field="Animal.nombreAnimal" header="Fecha de llegada" body={animalBodyTemplate} sortable></Column>
-                        <Column field="estadoSolicitud" header="Estado de la solicitud" body={estadoBodyTemplate}></Column>
+                        <Column header="Documento" body={documentoBodyTemplate}></Column>
+                        <Column field="estadoSolicitud" header="Estado de la solicitud"sortable body={estadoBodyTemplate}></Column>
                         <Column header="Más" body={actionBodyTemplate} style={{ width: '70px' }} ></Column>
                     </DataTable>
                     {/* Aqui va la ventana de editar/nuevo */}
@@ -360,15 +364,15 @@ const changeState = () => {
                                 <SelectUsuario idUsuario={solicitud.idUsuario_FK} onInputChange={onInputChange}/>
                             </div>
                             <div className="field col">
-                                <label htmlFor="enfermedad">Enfermedad</label>
+                                <label htmlFor="animal"></label>
                                 <SelectAnimal idAnimal={solicitud.idAnimal_FK} onInputChange={onInputChange}/>
                             </div>
                         </div>
 
                         <div className="formgrid grid">
                             <div className="field col">
-                                <label htmlFor="docSolicitud">Documento de la solicitud</label>
-                                <FileUpload value={solicitud.documentoSolicitud} onInputChange={onInputChange}/>
+                                <label htmlFor="docSolicitud"></label>
+                                <SelectDocumento value={solicitud.DocumentoSolicitud.urlDocumento} onInputChange={onInputChange}/>
                             </div>
                         </div>
                         </form>
