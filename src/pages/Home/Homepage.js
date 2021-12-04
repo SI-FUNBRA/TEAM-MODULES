@@ -57,7 +57,7 @@ const Homepage = () => {
             <GlobalStyle />
             <Navbar toggle={toggle} />
             <Dropdown isOpen={isOpen} toggle={toggle} />
-            <Slideshow />
+            <Slideshow showDialog={showDialog} />
             <AcercaDe {...InfoData} />
             <Modulos showDialog={showDialog}/>
             <Funcionalidades {...InfoDataTwo} />

@@ -93,7 +93,7 @@ const NextArrow=styled(IoArrowForward)`
     ${Boton}
 `;
 
-const Slideshow = () => {
+const Slideshow = (props) => {
 
     const slideshow=useRef(null);
 
@@ -178,7 +178,7 @@ const Slideshow = () => {
               <TextoSlide>
                 <h1>¿Te gustaria Adoptar?</h1>
                 <p>Primero debes loguearte para poder ver algunas<br /> fotografias de nuestros animalitos.</p>
-                <Buutton to='/catalogoAnimales' primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Ver Animalitos</Buutton>
+                <Buutton to='' onClick={()=>props.showDialog('/catalogoAnimales')} primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Ver Animalitos</Buutton>
               </TextoSlide>
             </Slide>
             <Slide>
@@ -188,7 +188,7 @@ const Slideshow = () => {
               <TextoSlide>
                 <h1>¿Te gustaria donar materiales?</h1>
                 <p>Hoy puedes ser parte de la solución y sostenimiento<br /> de nuestra fundación, brindandonos un apoyo material, generando grandes cambios.</p>
-                <Buutton to='/donacionEspecie' primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar en Especie</Buutton>
+                <Buutton to='' onClick={()=>props.showDialog('/donacionEspecie')} primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar en Especie</Buutton>
               </TextoSlide>
             </Slide>
           </ContenedorSlideshow>

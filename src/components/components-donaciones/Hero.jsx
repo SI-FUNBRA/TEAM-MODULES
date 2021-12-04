@@ -39,7 +39,7 @@ const Immg=styled.img`
 `;
 
 
-const Hero = () => {
+const Hero = (props) => {
 
     return (
         <HeroSection id='/inicio'>
@@ -51,7 +51,7 @@ const Hero = () => {
                     <h6 className="text-end me-5">El brote de COVID-19 y la subsiguiente cuarentena de las comunidades<br /> hicieron que muchos animalitos perdieran su hogar. Por eso debemos ayudarles!</h6>
                     <div className="d-flex justify-content-end me-5 mt-4">
                         <Buutton to="/" className="bg-secondary text-light me-4" style={{'display': 'inline-block'}}>Volver al Inicio</Buutton>
-                        <Buutton to="/catalogoAnimales" primary="true" style={{'display': 'inline-block'}}>Adoptar</Buutton>
+                        <Buutton to='' onClick={()=>props.showDialog('/catalogoAnimales')} primary="true" style={{'display': 'inline-block'}}>Adoptar</Buutton>
                     </div>
                 </div>
             </HeroWrapper>

@@ -7,7 +7,7 @@
                         {
                             label: 'Principal',
                             items: [
-                                {label:'Inicio', icon: 'pi pi-fw pi-home', to:'/dash/inicio'},
+                                {label:'Inicio', icon: 'pi pi-fw pi-home', to:'/dash'},
                                 {label:'Perfil', icon: 'pi pi-fw pi-id-card', to:'/dash/perfil'}
                             ]
                         },
@@ -23,7 +23,8 @@
                             label: 'Modulos',
                             items: [
                                 {label:'Usuarios', icon:'pi pi-fw pi-users', to:'/dash/usuarios'},
-
+                                {label:'Donacion Economica', icon:'pi pi-fw pi-money-bill', to:'/dash/donacionEconomica'},
+                                {label:'Donacion Especie', icon:'pi pi-fw pi-wallet', to:'/dash/donacionEspecie'}
                             ]
                         }
                     ];
@@ -32,7 +33,7 @@
                         {
                             label: 'Principal',
                             items: [
-                                {label:'Inicio', icon: 'pi pi-fw pi-home', to:'/dash/inicio'},
+                                {label:'Inicio', icon: 'pi pi-fw pi-home', to:'/dash'},
                                 {label:'Perfil', icon: 'pi pi-fw pi-id-card', to:'/dash/perfil'}
                             ]
                         },
@@ -40,6 +41,8 @@
                             label: 'Modulos',
                             items: [
                                 {label:'Usuarios', icon:'pi pi-fw pi-users', to:'/dash/usuarios'},
+                                {label:'Donacion Economica', icon:'pi pi-fw pi-money-bill', to:'/dash/donacionEconomica'},
+                                {label:'Donacion Especie', icon:'pi pi-fw pi-wallet', to:'/dash/donacionEspecie'}
 
                             ]
                         }
@@ -50,7 +53,7 @@
                         {
                             label: 'Principal',
                             items: [
-                                {label:'Inicio', icon: 'pi pi-fw pi-home', to:'/dash/inicio'},
+                                {label:'Inicio', icon: 'pi pi-fw pi-home', to:'/dash'},
                                 {label:'Perfil', icon: 'pi pi-fw pi-id-card', to:'/dash/perfil'}
                             ]
                         }
