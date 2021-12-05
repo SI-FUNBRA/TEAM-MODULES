@@ -57,7 +57,7 @@ const NaavMenuBars=styled(FaBars)`
 const NaavMenu=styled.div`
     display:flex;
     align-items:center;
-    margin-right:-48px;
+    margin-right:-20px;
 
     @media screen and (max-width:1048px){
         display:none;

@@ -26,6 +26,8 @@ import OtrosModulosPaisesCiudades from './pages/OtrosModulosPaisCiudad/OtrosModu
 import Perfil from './pages/Perfil/Perfil';
 import Permisos from './pages/permisos/Permisos';
 import { ServicioUsu } from './service/ServicioUsu';
+import DonacionesEcon from './pages/DonacionesEconomicas/IndexDonEcon';
+import DonacionesEsp from './pages/DonacionesEspecie/IndexDonEsp';
 
 const DashBoard = () => {
 
@@ -202,6 +204,12 @@ const DashBoard = () => {
                     </Route>
                     <Route path="/dash/permisos" exact>
                         <Permisos/>
+                    </Route>
+                    <Route path="/dash/donacionEconomica" exact>
+                        <DonacionesEcon/>
+                    </Route>
+                    <Route path="/dash/donacionEspecie" exact>
+                        <DonacionesEsp/>
                     </Route>
                 </div>
 

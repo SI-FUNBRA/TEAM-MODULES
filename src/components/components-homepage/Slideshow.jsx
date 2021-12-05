@@ -92,7 +92,7 @@ const NextArrow=styled(IoArrowForward)`
     ${Boton}
 `;
 
-const Slideshow = (porps) => {
+const Slideshow = (props) => {
 
     const slideshow=useRef(null);
 
@@ -168,7 +168,7 @@ const Slideshow = (porps) => {
               <TextoSlide>
                 <h1>¿Te gustaria Donar?</h1>
                 <p>En nuestra fundación te agradecemos por tu colaboración<br /> es muy importante para tanto nosotros como para nuestros animalitos.</p>
-                <Button  onClick={()=>porps.showDialog("/donacionEconomica")} primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar</Button>
+                <Button  onClick={()=>props.showDialog("/donacionEconomica")} primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar</Button>
               </TextoSlide>
             </Slide>
 
@@ -179,7 +179,7 @@ const Slideshow = (porps) => {
               <TextoSlide>
                 <h1>¿Te gustaria Adoptar?</h1>
                 <p>Primero debes loguearte para poder ver algunas<br /> fotografias de nuestros animalitos.</p>
-                <Button  onClick={()=>porps.showDialog('/catalogoAnimales')} primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Ver Animales</Button>
+                <Button  onClick={()=>props.showDialog('/catalogoAnimales')} primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Ver Animales</Button>
               </TextoSlide>
             </Slide>
             <Slide>
@@ -189,7 +189,7 @@ const Slideshow = (porps) => {
               <TextoSlide>
                 <h1>¿Te gustaria donar materiales?</h1>
                 <p>Hoy puedes ser parte de la solución y sostenimiento<br /> de nuestra fundación, brindandonos un apoyo material, generando grandes cambios.</p>
-                <Button  onClick={()=>porps.showDialog('/donacionEspecie')} primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar en Especie</Button>
+                <Button  onClick={()=>props.showDialog('/donacionEspecie')} primary='true' style={{'marginRight': 'auto', 'marginLeft': 'auto'}}>Donar en Especie</Button>
               </TextoSlide>
             </Slide>
 
