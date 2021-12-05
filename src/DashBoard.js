@@ -28,7 +28,8 @@ import Permisos from './pages/permisos/Permisos';
 import { ServicioUsu } from './service/ServicioUsu';
 import DonacionesEcon from './pages/DonacionesEconomicas/IndexDonEcon';
 import DonacionesEsp from './pages/DonacionesEspecie/IndexDonEsp';
-
+import Cita from './pages/cita/IndexCita';
+import Sede from './pages/sede/IndexSede';
 const DashBoard = () => {
 
     const [layoutMode, setLayoutMode] = useState('static');
@@ -210,6 +211,12 @@ const DashBoard = () => {
                     </Route>
                     <Route path="/dash/donacionEspecie" exact>
                         <DonacionesEsp/>
+                    </Route>
+                    <Route path="/dash/cita" exact>
+                        <Cita/>
+                    </Route>
+                    <Route path="/dash/sede" exact>
+                        <Sede/>
                     </Route>
                 </div>
 

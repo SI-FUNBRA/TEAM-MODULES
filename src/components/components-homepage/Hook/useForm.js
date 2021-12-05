@@ -1,4 +1,5 @@
-import {useState} from 'react'
+import {useState} from 'react';
+
 
 export const useForm = (initialForm, validateForm) => {
 
@@ -22,6 +23,7 @@ export const useForm = (initialForm, validateForm) => {
         setErrors(validateForm(form));
     }
 
+    console.log(form);
     return {
         form,
         errors,

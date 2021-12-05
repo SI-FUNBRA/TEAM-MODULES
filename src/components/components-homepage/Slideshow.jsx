@@ -47,6 +47,8 @@ const TextoSlide=styled.div`
 
   h1{
     margin: 0 0 20px 0;
+    font-weight: 600;
+    font-size: 60px;
   }
 
   p{
@@ -160,7 +162,6 @@ const Slideshow = (props) => {
     return (
         <ContenedorPrincipal  id='/inicio'>
           <ContenedorSlideshow ref={slideshow}>
-
             <Slide>
 
                 <img src={ImageOne} alt="DonacionEcon" />

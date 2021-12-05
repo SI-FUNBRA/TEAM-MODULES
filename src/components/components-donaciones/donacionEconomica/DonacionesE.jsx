@@ -166,7 +166,7 @@ const DonacionesE = () => {
                     <BsPaypal /> Paypal
                 </Bootton>
             )}
-            <Buutton to='/donacionEconomica/listDonEcon' style={{'margin': '0 auto'}}>Ir</Buutton>
+            {/* <Buutton to='/donacionEconomica/listDonEcon' style={{'margin': '0 auto'}}>Ir</Buutton> */}
         </Section>
     )
 }

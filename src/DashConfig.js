@@ -1,14 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { RadioButton } from 'primereact/radiobutton';
-import { InputSwitch } from 'primereact/inputswitch';
 import classNames from 'classnames';
 import {Button} from "primereact/button";
 
 export const DashConfig = (props) => {
 
     let colorInicio = () =>  localStorage.getItem('color')
-    let temaInicio = () =>  (localStorage.getItem('tema'))?localStorage.getItem('tema'):'saga'
-
+    /* let temaInicio = () =>  (localStorage.getItem('tema'))?localStorage.getItem('tema'):'saga'*/
     const [active, setActive] = useState(false);
     const [scale, setScale] = useState(16);
     const [scales] = useState([12,13,14,15,16]);

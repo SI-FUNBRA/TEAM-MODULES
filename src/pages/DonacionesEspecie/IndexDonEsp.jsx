@@ -8,7 +8,6 @@ import { Toolbar } from 'primereact/toolbar';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
-import { Card } from 'primereact/card';
 import { ServicioUsu } from '../../service/ServicioUsu';
 import SelectTipoDocumento from '../../components/tipoDoc/SelectTipoDocumento';
 import { Dropdown } from 'primereact/dropdown';
