@@ -15,7 +15,6 @@ import DonacionEspecie from './pages/Donacion/DonacionesEspecie';
 import ListDonEcon from './components/components-donaciones/donacionEconomica/ListDonEcon';
 import ListDonEsp from './components/components-donaciones/donacionEspecie/ListSolDonEsp'
 import Catalog from './pages/Catalog/Catalogoss';
-import LandingPage from './pages/Landing/LandingPage';
 
 ReactDOM.render(
     <HashRouter>
@@ -27,11 +26,6 @@ ReactDOM.render(
                 <Route path="/log" >
                     <Log />
                 </Route>
-                {/* Landing usuarios */}
-                <Route path="/usuarios">
-                    <LandingPage />
-                </Route>
-                {/* Fin Landing usuarios */}
                 {/* Donaciones */}
                 <Route path="/donacionEconomica/listDonEsp">
                     <ListDonEsp />

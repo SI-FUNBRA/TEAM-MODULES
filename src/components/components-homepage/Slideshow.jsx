@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 
 import styled from 'styled-components';
 //Export images
+import inicio from '../../images/inicio.jpg'
 import ImageOne from '../../images/ImageOne.jpg';
 import ImageTwo from '../../images/ImageTwo.jpg';
 import ImageThree from '../../images/ImageThree.jpg';
@@ -48,6 +49,8 @@ const TextoSlide=styled.div`
 
   h1{
     margin: 0 0 20px 0;
+    font-weight: 600;
+    font-size: 60px;
   }
 
   p{
@@ -161,6 +164,16 @@ const Slideshow = (props) => {
     return (
         <ContenedorPrincipal  id='/inicio'>
           <ContenedorSlideshow ref={slideshow}>
+          <Slide>
+              <a href="/">
+                <img src={inicio} alt="Inicio" />
+              </a>
+              <TextoSlide>
+                <h1>¡Bienvenido!</h1>
+                <h4 style={{'marginBottom': '0'}}>Nuestra fundacion se complace verte</h4>
+                <p>Explora la variedad de cosas que tenemos para ti.</p>
+              </TextoSlide>
+            </Slide>
             <Slide>
               <a href="/">
                 <img src={ImageOne} alt="DonacionEcon" />
