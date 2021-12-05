@@ -8,7 +8,6 @@ import { Toolbar } from 'primereact/toolbar';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
-import { Card } from 'primereact/card';
 import { ServicioUsu } from '../../service/ServicioUsu';
 import SelectTipoDocumento from '../../components/tipoDoc/SelectTipoDocumento';
 import { Dropdown } from 'primereact/dropdown';
@@ -24,28 +23,17 @@ const IndexUsu = () => {
     let today = new Date()
 
     let emptyUsuario = {
-        idUsuario: "",
+        idDonacionEconomica: '',
+        fechaDonacion: '',
+        montoDonacion: '',
+        metododepago: {
+            nombreMetodoPago: ''
+        },
+        Usuario: {
             nombreUsuario: '',
             apellidoUsuario: '',
-            correoUsuario: '',
-            correoUsuario2: '',
-            telefonoFijo: '',
-            telefonoCelular: '',
-            fechaNacimientoUsuario:'',
-            idTipoDocumento_FK:'',
-            numeroDocumento:'',
-            fechaExpedicionDoc:'',
-            LugarExpedicionDoc:'',
-            idCiudad_FK:'',
-            TipoDocumento:{
-                nombreTipoDoc:''
-            },
-            Ciudad:{
-                nombreCiudad:''
-            },
-            LugarExpedicionDocu:{
-                nombreCiudad:''
-            }
+            correoUsuario: ''
+        }
 
     };
 
@@ -175,7 +163,7 @@ const IndexUsu = () => {
         return (
             <>
                 <span className="p-column-title">Nombre</span>
-                {rowData.nombreUsuario}
+                {rowData.Usuario.nombreUsuario}
             </>
         );
     }
@@ -184,7 +172,7 @@ const IndexUsu = () => {
         return (
             <>
                 <span className="p-column-title">Apellido</span>
-                {rowData.apellidoUsuario}
+                {rowData.Usuario.apellidoUsuario}
             </>
         );
     }

@@ -18,7 +18,7 @@ const Ciudades = () => {
         nombreCiudad: '',
         idPais_FK:'',
 
-        Pai:{
+          Pai:{
             nombrePais:''
         }
     };

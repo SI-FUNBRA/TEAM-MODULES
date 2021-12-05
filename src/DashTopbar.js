@@ -110,7 +110,7 @@ export const DashTopbar = (props) => {
     return (
         <div className="layout-topbar">
             <Link to="/" className="layout-topbar-logo">
-                <img src={props.layoutColorMode === 'light' ? 'assets/layout/images/logolargo.png' : 'assets/layout/images/logolargo.png'} alt="logo"/>
+                <img src={'assets/layout/images/logolargo.png'} alt="logo"/>
             </Link>
 
             <button type="button" className="p-link  layout-menu-button layout-topbar-button" onClick={props.onToggleMenuClick}>
