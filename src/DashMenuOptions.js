@@ -24,7 +24,9 @@
                             items: [
                                 {label:'Usuarios', icon:'pi pi-fw pi-users', to:'/dash/usuarios'},
                                 {label:'Donacion Economica', icon:'pi pi-fw pi-money-bill', to:'/dash/donacionEconomica'},
-                                {label:'Donacion Especie', icon:'pi pi-fw pi-wallet', to:'/dash/donacionEspecie'}
+                                {label:'Donacion Especie', icon:'pi pi-fw pi-wallet', to:'/dash/donacionEspecie'},
+                                {label:'Cita', icon:'pi pi-fw pi-wallet', to:'/dash/cita'},
+                                {label:'Sede', icon:'pi pi-fw pi-wallet', to:'/dash/sede'}
                             ]
                         }
                     ];
@@ -42,7 +44,9 @@
                             items: [
                                 {label:'Usuarios', icon:'pi pi-fw pi-users', to:'/dash/usuarios'},
                                 {label:'Donacion Economica', icon:'pi pi-fw pi-money-bill', to:'/dash/donacionEconomica'},
-                                {label:'Donacion Especie', icon:'pi pi-fw pi-wallet', to:'/dash/donacionEspecie'}
+                                {label:'Donacion Especie', icon:'pi pi-fw pi-wallet', to:'/dash/donacionEspecie'},
+                                {label:'Cita', icon:'pi pi-fw pi-wallet', to:'/dash/cita'},
+                                {label:'Sede', icon:'pi pi-fw pi-wallet', to:'/dash/sede'}
 
                             ]
                         }
@@ -54,7 +58,8 @@
                             label: 'Principal',
                             items: [
                                 {label:'Inicio', icon: 'pi pi-fw pi-home', to:'/dash'},
-                                {label:'Perfil', icon: 'pi pi-fw pi-id-card', to:'/dash/perfil'}
+                                {label:'Perfil', icon: 'pi pi-fw pi-id-card', to:'/dash/perfil'},
+                                {label:'Sede', icon:'pi pi-fw pi-wallet', to:'/dash/sede'}
                             ]
                         }
                 ]
