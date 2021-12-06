@@ -407,7 +407,7 @@ const IndexUsu = () => {
                         globalFilter={globalFilter} emptyMessage="No se encontro ningun registro." header={header}>
                         <Column field="nombreUsuario" header="Nombre" sortable body={nombreBodyTemplate}></Column>
                         <Column field="apellidoUsuario" header="Apellido" sortable body={apellidoBodyTemplate}></Column>
-                        <Column field="telefonoCelular" header="Ceular" body={celularBodyTemplate} sortable></Column>
+                        <Column field="telefonoCelular" header="Celuar" body={celularBodyTemplate} sortable></Column>
                         <Column field="numeroDocumento" header="Documento" sortable body={documentoBodyTemplate}></Column>
                         <Column field="Ciudad.nombreCiudad" header="Ciudad" body={barrioBodyTemplate} sortable></Column>
                         <Column header="Mas" body={actionBodyTemplate} style={{ width: '70px' }} ></Column>
