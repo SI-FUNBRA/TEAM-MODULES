@@ -25,8 +25,8 @@
                                 {label:'Usuarios', icon:'pi pi-fw pi-users', to:'/dash/usuarios'},
                                 {label:'Donacion Economica', icon:'pi pi-fw pi-money-bill', to:'/dash/donacionEconomica'},
                                 {label:'Donacion Especie', icon:'pi pi-fw pi-wallet', to:'/dash/donacionEspecie'},
-                                {label:'Cita', icon:'pi pi-fw pi-wallet', to:'/dash/cita'},
-                                {label:'Sede', icon:'pi pi-fw pi-wallet', to:'/dash/sede'}
+                                {label:'Cita', icon:'pi pi-fw pi-calendar', to:'/dash/cita'},
+                                {label:'Sede', icon:'pi pi-fw pi-star-o', to:'/dash/sede'}
                             ]
                         }
                     ];
