@@ -30,6 +30,16 @@ import DonacionesEcon from './pages/DonacionesEconomicas/IndexDonEcon';
 import DonacionesEsp from './pages/DonacionesEspecie/IndexDonEsp';
 import Cita from './pages/cita/IndexCita';
 import Sede from './pages/sede/IndexSede';
+
+import Animal from './pages/animal/IndexAnimal';
+import DocumentoAdopcion from './pages/documentoAdopcion/IndexDocumento';
+import Enfermedad from './pages/enfermedad/IndexEnfermedad';
+import Fotografia from './pages/fotografia/IndexFotografia';
+import Solicitud from './pages/solicitud/IndexSolicitud';
+import TipoAnimal from './pages/tipoAnimal/IndexTipoAnimal';
+import Tratamiento from './pages/tratamiento/IndexTratamiento';
+
+
 const DashBoard = () => {
 
     const [layoutMode, setLayoutMode] = useState('static');
@@ -217,6 +227,29 @@ const DashBoard = () => {
                     </Route>
                     <Route path="/dash/sede" exact>
                         <Sede/>
+                    </Route>
+
+
+                    <Route path="/dash/animal" exact>
+                        <Animal/>
+                    </Route>
+                    <Route path="/dash/solicitudesAdopcion" exact>
+                        <DocumentoAdopcion/>
+                    </Route>
+                    <Route path="/dash/enfermedad" exact>
+                        <Enfermedad/>
+                    </Route>
+                    <Route path="/dash/fotografia" exact>
+                        <Fotografia/>
+                    </Route>
+                    <Route path="/dash/tipoAnimal" exact>
+                        <TipoAnimal/>
+                    </Route>
+                    <Route path="/dash/tratamiento" exact>
+                        <Tratamiento/>
+                    </Route>
+                    <Route path="/dash/documentoSolicitud" exact>
+                        <Solicitud/>
                     </Route>
                 </div>
 

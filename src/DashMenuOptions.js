@@ -26,7 +26,15 @@
                                 {label:'Donacion Economica', icon:'pi pi-fw pi-money-bill', to:'/dash/donacionEconomica'},
                                 {label:'Donacion Especie', icon:'pi pi-fw pi-wallet', to:'/dash/donacionEspecie'},
                                 {label:'Cita', icon:'pi pi-fw pi-wallet', to:'/dash/cita'},
-                                {label:'Sede', icon:'pi pi-fw pi-wallet', to:'/dash/sede'}
+                                {label:'Sede', icon:'pi pi-fw pi-wallet', to:'/dash/sede'},
+
+                                {label:'Solicitudes de adopción', icon:'pi pi-fw pi-file', to:'/dash/solicitudesAdopcion'},
+                                {label:'Documentos de solicitudes de adopción', icon:'pi pi-fw pi-file', to:'/dash/documentoSolicitud'},
+                                {label:'Animales', icon:'pi pi-fw pi-twitter', to:'/dash/animal'},
+                                {label:'Tipos de animal', icon:' pi-fw pi-th-large', to:'/dash/tipoAnimal'},
+                                {label:'Enfermedades', icon:'pi pi-fw pi-clone', to:'/dash/enfermedad'},
+                                {label:'Tratamientos', icon:'pi pi-fw pi-heart', to:'/dash/tratamiento'},
+                                {label:'Fotografia', icon:'pi pi-fw pi-heart', to:'/dash/fotografia'}
                             ]
                         }
                     ];
@@ -46,8 +54,15 @@
                                 {label:'Donacion Economica', icon:'pi pi-fw pi-money-bill', to:'/dash/donacionEconomica'},
                                 {label:'Donacion Especie', icon:'pi pi-fw pi-wallet', to:'/dash/donacionEspecie'},
                                 {label:'Cita', icon:'pi pi-fw pi-wallet', to:'/dash/cita'},
-                                {label:'Sede', icon:'pi pi-fw pi-wallet', to:'/dash/sede'}
+                                {label:'Sede', icon:'pi pi-fw pi-wallet', to:'/dash/sede'},
 
+                                {label:'Solicitudes de adopción', icon:'pi pi-fw pi-file', to:'/dash/solicitudesAdopcion'},
+                                {label:'Documentos de solicitudes de adopción', icon:'pi pi-fw pi-file', to:'/dash/documentoSolicitud'},
+                                {label:'Animales', icon:'pi pi-fw pi-twitter', to:'/dash/animal'},
+                                {label:'Tipos de animal', icon:' pi-fw pi-th-large', to:'/dash/tipoAnimal'},
+                                {label:'Enfermedades', icon:'pi pi-fw pi-clone', to:'/dash/enfermedad'},
+                                {label:'Tratamientos', icon:'pi pi-fw pi-heart', to:'/dash/tratamiento'},
+                                {label:'Fotografia', icon:'pi pi-fw pi-heart', to:'/dash/fotografia'}
                             ]
                         }
                     ];
