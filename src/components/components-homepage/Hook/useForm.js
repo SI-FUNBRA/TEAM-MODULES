@@ -1,6 +1,5 @@
 import {useState} from 'react';
 
-import swal from 'sweetalert'
 
 export const useForm = (initialForm, validateForm) => {
 
@@ -10,7 +9,6 @@ export const useForm = (initialForm, validateForm) => {
     const[response]=useState(null);
 
     const handleChange=(e)=>{
-        const {name, value}=e.target
         setForm({
             ...form,
             [e.target.name]:e.target.value

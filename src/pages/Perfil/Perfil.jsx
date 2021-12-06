@@ -19,7 +19,6 @@ const Perfil = () => {
             servicioUsuario.getUsuarioPorId(res.data.id).then(response=>{
                 setPerfil(response.data)
                 setKeyComponent(keyComponent+1)
-                console.log(response)
             })
         })
 

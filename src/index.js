@@ -33,6 +33,7 @@ ReactDOM.render(
                 <Route path="/donacionEconomica/listDonEcon">
                     <ListDonEcon />
                 </Route>
+
                 <Route path="/donacionEconomica">
                     <DonacionEconomica />
                 </Route>
@@ -42,10 +43,10 @@ ReactDOM.render(
                 {/* Fin Donaciones */}
                 <Route exact path="/" >
                     <HomePage />
-                </Route>
-                <Route exact path="/catalogoAnimales" component>
+                </Route>{
+                <Route exact path="/catalogoAnimales" >
                     <Catalog />
-                </Route>
+                </Route>}
             </Switch>
         </ScrollToTop>
     </HashRouter>,

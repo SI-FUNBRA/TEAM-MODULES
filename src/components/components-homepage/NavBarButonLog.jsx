@@ -28,6 +28,7 @@ const NavBarButonLog = () => {
 
     const cerrarSesion = () =>{
         localStorage.removeItem('token')
+        redireccionar('/')
         window.location.reload()
     }
 

@@ -48,7 +48,7 @@ export const Login = (props) => {
             serviCredencial.Login(data).then(res=>{
                 if(res.status===201){
                     localStorage.setItem('token', res.data.success)
-                    history.push('/dash')
+                    history.push('/dash/inicio')
                 }else{
                     props.toast.current.show({ severity: 'error', summary: 'Error', detail: res.data.error, life: 3000 });
                 }

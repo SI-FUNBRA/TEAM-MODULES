@@ -23,19 +23,10 @@ const SelectPais= (props) => {
         props.onChange(e)
     }
 
-    const countryOptionTemplate = (option) => {
-        return (
-            <div className="country-item">
-                <i className="pi pi-map-marker p-mr-2"/>
-                <span>{option.nombrePais}</span>
-            </div>
-        );
-    }
 
     return (
         <div>
-                {/* <Dropdown  id={props.name} name={props.name} value={paisSelect} itemTemplate={countryOptionTemplate} options={countries} onChange={onCategoryChange} emptyFilterMessage={'No se a encontrado ningun resultado'} emptyMessage={'No se a encontrado ningun resultado'} optionValue="idPais" optionLabel="nombrePais" filter showClear filterBy="nombreCiudad"/>
-                 */}<Dropdown id={props.name} name={props.name} value={paisSelect} options={countries} onChange={onCategoryChange} filter showClear filterBy="nombrePais" placeholder="Seleccione un País"
+            <Dropdown id={props.name} name={props.name} value={paisSelect} options={countries} onChange={onCategoryChange} filter showClear filterBy="nombrePais" placeholder="Seleccione un País"
                         optionValue="idPais" optionLabel="nombrePais"/>
         </div>
     )

@@ -16,6 +16,7 @@ const Donaciones = () => {
     const [dialogLogin, setDialogLogin] = useState(false)
 
     const showDialog = (ruta) =>{
+        console.log(dialogLogin)
         if(localStorage.getItem('token')){
             history.push(ruta)
         }else{

@@ -25,8 +25,9 @@
                                 {label:'Usuarios', icon:'pi pi-fw pi-users', to:'/dash/usuarios'},
                                 {label:'Donacion Economica', icon:'pi pi-fw pi-money-bill', to:'/dash/donacionEconomica'},
                                 {label:'Donacion Especie', icon:'pi pi-fw pi-wallet', to:'/dash/donacionEspecie'},
-                                {label:'Cita', icon:'pi pi-fw pi-wallet', to:'/dash/cita'},
-                                {label:'Sede', icon:'pi pi-fw pi-wallet', to:'/dash/sede'},
+
+                                {label:'Cita', icon:'pi pi-fw pi-calendar', to:'/dash/cita'},
+                                {label:'Sede', icon:'pi pi-fw pi-star-o', to:'/dash/sede'},
 
                                 {label:'Solicitudes de adopción', icon:'pi pi-fw pi-file', to:'/dash/solicitudesAdopcion'},
                                 {label:'Documentos de solicitudes de adopción', icon:'pi pi-fw pi-file', to:'/dash/documentoSolicitud'},
@@ -35,6 +36,9 @@
                                 {label:'Enfermedades', icon:'pi pi-fw pi-clone', to:'/dash/enfermedad'},
                                 {label:'Tratamientos', icon:'pi pi-fw pi-heart', to:'/dash/tratamiento'},
                                 {label:'Fotografia', icon:'pi pi-fw pi-heart', to:'/dash/fotografia'}
+
+
+
                             ]
                         }
                     ];

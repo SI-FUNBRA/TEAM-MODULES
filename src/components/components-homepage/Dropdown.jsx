@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Buutton } from './Buutton';
 
 import Logoo from '../../images/Logo.png';
+import NavBarButonLog from './NavBarButonLog';
 
 //import { LinkScroll } from 'react-scroll';
 
@@ -39,7 +40,7 @@ const CloseIcon=styled(FaTimes)`
 `;
 
 const DropDownWrapper=styled.div`
-    
+
 `;
 
 const DropdownMenu=styled.div`
@@ -84,20 +85,22 @@ const Dropdown = ({isOpen, toggle}) => {
                 <CloseIcon />
             </DropdawnIcon>
             <img src={Logoo} alt="Logo Zoopport" style={{
-                    'margin': '0 0 -50px 50px',
-                    'width': '160px', 
-                    'height': '110px;'
+                'margin': '0 0 -50px 50px',
+                'width': '160px'
                 }}
-            />
+                height={'110px'}
+                />
+                <BtnWrap>
+                        {!localStorage.getItem('token')&& <Buutton primary='true' round='true' big='true' to='/log/login'>Iniciar Sesión</Buutton>}
+                        {localStorage.getItem('token')&&<NavBarButonLog/>}
+                </BtnWrap>
             <DropDownWrapper>
                 <DropdownMenu>
                     {menuData.map((item,i)=>(
                         <DropdownLink to={item.link} key={i}>{item.title}</DropdownLink>
                     ))}
                 </DropdownMenu>
-                <BtnWrap>
-                    <Buutton primary='true' round='true' big='true' to='/acercaDe'>Iniciar Sesión</Buutton>
-                </BtnWrap>
+
             </DropDownWrapper>
         </DropdawnContainer>
     )

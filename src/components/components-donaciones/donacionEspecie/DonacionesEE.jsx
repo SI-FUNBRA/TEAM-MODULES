@@ -10,6 +10,7 @@ import {CgDanger} from 'react-icons/cg';
 
 import './stylesLocalStorage.css';
 import DataDonE from './DataDonE';
+import { ServicioUsu } from '../../../service/ServicioUsu';
 
 const Section=styled.section`
     span{
@@ -240,6 +241,7 @@ const DonacionesEE = () => {
     }
 
     const [dataSolDonEsp, setDataSolDonEsp]=useState({
+        idUsuario:'',
         estadoSolicitud:"",
         fechaEntrega:"",
         lugarEntrega:"",
@@ -264,12 +266,16 @@ const DonacionesEE = () => {
 
     const[dataa, setDataa]=useState(getDatafromDE())
 
-    const [tipoArticuloDonado, setTipoArticuloDonado]=useState('');
     const [nombreArticuloDonado, setNombreArticuloDonado]=useState('');
     const [cantidadArticuloDonado, setCantidadArticuloDonado]=useState('');
 
     useEffect(()=>{
         sessionStorage.setItem('dataSolDonEsp.ArticulosDonados', JSON.stringify(dataSolDonEsp.ArticulosDonados));
+        const serviUsu = new ServicioUsu()
+
+        serviUsu.getUsertopbar().then(res=>{
+            setDataSolDonEsp({...dataSolDonEsp, 'idUsuario':res.data.id})
+        })
     }, [dataSolDonEsp.ArticulosDonados]);
 
     //Eliminar un registro de dataa
@@ -295,12 +301,13 @@ const DonacionesEE = () => {
     //     setErrors(validateForm(cantidadArticuloDonado));
     // }
 
-    const URL='http://localhost:3005/api/solicitudDonacionEspecie';
+    const URL=`${process.env.REACT_APP_API_URL}/solicitudDonacionEspecie`;
 
     const handleSubmit=(e)=>{
         e.preventDefault();
 
         console.log(dataSolDonEsp);
+        console.log(dataa);
 
         axios.post(URL, dataSolDonEsp).then((res)=>{
             if(res.status===201){
@@ -418,7 +425,7 @@ const DonacionesEE = () => {
                             </DEFormContent>
                         </DEFormWrap>
                     </DESection>
-                    <Buutton className="mx-5" to='/donacionEconomica/listDonEsp' primary='true' style={{'margin-top':'1.5rem'}}>Ir</Buutton>
+                    <Buutton className="mx-5" to='/donacionEconomica/listDonEsp' primary='true' style={{'marginTop':'1.5rem'}}>Ir</Buutton>
                 </ColumnLeft>
                 <ColumnRight className={estado}>
                         <DEFormTwo action='' onSubmit={handleProducto}>

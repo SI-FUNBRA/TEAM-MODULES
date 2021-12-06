@@ -4,7 +4,6 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
-import { Row } from 'primereact/row';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { ServicioRol } from '../../../service/ServicioRol';
@@ -96,10 +95,10 @@ const TipoUsuario = () => {
     //corresponde a la columna de las acciones
     const actionBodyTemplate = (rowData) => {
         return (
-            <Row className="actions">
+            <div className="actions">
                 <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => editItem(rowData)} />
                 <Button icon={iconchangeState} className="p-button-rounded p-button-warning" onClick={() => confirmChangeState(rowData)} />
-            </Row>
+            </div>
 
         );
     }
@@ -202,7 +201,7 @@ const TipoUsuario = () => {
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="Registros {first} a {last} de un total de {totalRecords}"
                         globalFilter={globalFilter} emptyMessage="No se encontro ningun registro." header={header}>
-                        <Column field="nombreRol" header="Tipo Documento" body={barrioBodyTemplate} sortable></Column>
+                        <Column field="nombreRol" header="Tipo Rol" body={barrioBodyTemplate} sortable></Column>
                         <Column header="Acciones" body={actionBodyTemplate}></Column>
                     </DataTable>
 

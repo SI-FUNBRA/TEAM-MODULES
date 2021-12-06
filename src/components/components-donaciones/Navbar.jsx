@@ -2,9 +2,12 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/macro';
 
 import {animateScroll as scroll} from 'react-scroll';
-
+import {Button} from 'primereact/button'
 import Logoo from '../../images/Logo.png';
+import NavBarButonLog from '../components-homepage/NavBarButonLog';
 
+import { BiBriefcase } from "react-icons/bi";
+import { useHistory } from 'react-router';
 const Naav=styled.nav`
     background:${({scrollNav}) => (scrollNav ? '#fff' : 'transparent')};
     height:60px;
@@ -42,6 +45,20 @@ const Navbar = ({toggle}) => {
     }
 
 
+const NaavBtn=styled.div`
+    display:flex;
+    align-items:center;
+
+    @media screen and (max-width:1198px){
+        display:none;
+    }
+`;
+    const history = new useHistory()
+
+    const handleButton = () =>{
+            history.push('/dash')
+    }
+
     return (
         <Naav scrollNav={scrollNav}>
             <img src={Logoo} alt="Logo Zoopport" onClick={toggleHome}
@@ -52,6 +69,13 @@ const Navbar = ({toggle}) => {
                     'height':'45px'
                 }}
             />
+
+            <div className="flex alining-items-center">
+                <NaavBtn>
+                    {localStorage.getItem('token')&&<NavBarButonLog/>}
+                </NaavBtn>
+                <Button tooltip="DashBoard" tooltipOptions={{position:'left'}} className="d-flex d-xl-none col-12" onClick={handleButton}><BiBriefcase/></Button>
+            </div>
 
         </Naav>
     )

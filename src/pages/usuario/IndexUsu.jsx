@@ -8,7 +8,6 @@ import { Toolbar } from 'primereact/toolbar';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
-import { Card } from 'primereact/card';
 import { ServicioUsu } from '../../service/ServicioUsu';
 import SelectTipoDocumento from '../../components/tipoDoc/SelectTipoDocumento';
 import { Dropdown } from 'primereact/dropdown';
@@ -155,7 +154,7 @@ const IndexUsu = () => {
         return (
             //retorna un fragmento de codigo con botones, parte superior izquierda
             <React.Fragment>
-                <div className="my-2">
+                <div className="mt-4">
                     <Button label="Nuevo" icon={AiOutlineUserAdd} iconPos="right" className="p-button-success mr-2" onClick={openNew} />
                 </div>
             </React.Fragment>
@@ -408,7 +407,7 @@ const IndexUsu = () => {
                         globalFilter={globalFilter} emptyMessage="No se encontro ningun registro." header={header}>
                         <Column field="nombreUsuario" header="Nombre" sortable body={nombreBodyTemplate}></Column>
                         <Column field="apellidoUsuario" header="Apellido" sortable body={apellidoBodyTemplate}></Column>
-                        <Column field="telefonoCelular" header="Ceular" body={celularBodyTemplate} sortable></Column>
+                        <Column field="telefonoCelular" header="Celuar" body={celularBodyTemplate} sortable></Column>
                         <Column field="numeroDocumento" header="Documento" sortable body={documentoBodyTemplate}></Column>
                         <Column field="Ciudad.nombreCiudad" header="Ciudad" body={barrioBodyTemplate} sortable></Column>
                         <Column header="Mas" body={actionBodyTemplate} style={{ width: '70px' }} ></Column>
@@ -421,8 +420,8 @@ const IndexUsu = () => {
                 <div className="card">
                     <h5 className="p-text-center">{(!formik.values.idUsuario)?"Nuevo Usuario":`Editando a ${formik.values.nombreUsuario}` }</h5>
                     <form onSubmit={formik.handleSubmit}>
-                        <div className="formgrid grid my-4">
-                            <div className="p-field col">
+                        <div className="formgrid grid ">
+                            <div className="p-field col-12 mt-4 sm:col-6 md:col-6 xl:col-6 lg:col-6">
                                 <span className="p-float-label p-input-icon-right">
                                     <i><FaUserAlt/></i>
                                     <InputText id="nombreUsuario" name="nombreUsuario" value={formik.values.nombreUsuario} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('nombreUsuario') })} />
@@ -430,7 +429,7 @@ const IndexUsu = () => {
                                 </span>
                                 {getFormErrorMessage('nombreUsuario')}
                             </div>
-                            <div className="p-field col">
+                            <div className="p-field col-12 mt-4 sm:col-6 md:col-6 xl:col-6 lg:col-6 ">
                                 <span className="p-float-label p-input-icon-right">
                                     <i><FaUserAlt/></i>
                                     <InputText id="apellidoUsuario" name="apellidoUsuario" value={formik.values.apellidoUsuario} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('apellidoUsuario') })} />
@@ -440,17 +439,17 @@ const IndexUsu = () => {
                             </div>
                         </div>
 
-                        <div className="formgrid grid my-4">
-                            <div className="p-field col">
+                        <div className="formgrid grid ">
+                            <div className="p-field col-12 mt-4 sm:col-6 md:col-6 xl:col-6 lg:col-6">
                                 <span className="p-float-label p-input-icon-right">
                                     <i><MdEmail /></i>
-                                    <InputText id="correoUsuario" name="correoUsuario" value={formik.values.correoUsuario} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('correoUsuario') })} />
+                                    <InputText id="correoUsuario" name="correoUsuario" value={formik.values.correoUsuario} onChange={formik.handleChange}  className={classNames({ 'p-invalid': isFormFieldValid('correoUsuario') })} />
                                     <label htmlFor="correoUsuario" className={classNames({ 'p-error': isFormFieldValid('correoUsuario') })}>Correo*</label>
                                 </span>
                                 {getFormErrorMessage('correoUsuario')}
                             </div>
                             {!formik.values.idUsuario &&
-                                <div className="p-field col">
+                                <div className="p-field col-12 mt-4 sm:col-6 md:col-6 xl:col-6 lg:col-6">
                                     <span className="p-float-label p-input-icon-right">
                                         <i><MdMarkEmailRead/></i>
                                         <InputText id="correoUsuario2" name="correoUsuario2" value={formik.values.correoUsuario2} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('correoUsuario2') })} />
@@ -461,16 +460,16 @@ const IndexUsu = () => {
                             }
                         </div>
 
-                        <div className="formgrid grid my-4">
-                            <div className="p-field col">
+                        <div className="formgrid grid ">
+                            <div className="p-field col-12 mt-4 sm:col-6 md:col-6 xl:col-6 lg:col-6">
                                 <span className="p-float-label p-input-icon-right">
                                     <i><BsFillTelephoneFill/></i>
-                                    <InputText id="telefonoFijo" name="telefonoFijo" value={formik.values.telefonoFijo} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('telefonoFijo') })} />
+                                    <InputText id="telefonoFijo" name="telefonoFijo" value={formik.values.telefonoFijo} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('telefonoFijo') })} />
                                     <label htmlFor="telefonoFijo" className={classNames({ 'p-error': isFormFieldValid('telefonoFijo') })}>Telefono</label>
                                 </span>
                                 {getFormErrorMessage('telefonoFijo')}
                             </div>
-                            <div className="p-field col">
+                            <div className="p-field col-12 mt-4 sm:col-6 md:col-6 xl:col-6 lg:col-6">
                                 <span className="p-float-label p-input-icon-right">
                                     <i><MdOutlinePhoneAndroid/></i>
                                     <InputText id="telefonoCelular" name="telefonoCelular" value={formik.values.telefonoCelular} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('telefonoCelular') })} />
@@ -480,9 +479,9 @@ const IndexUsu = () => {
                             </div>
                         </div>
 
-                        <div className="formgrid grid my-4">
+                        <div className="formgrid grid ">
                             {!formik.values.idUsuario &&
-                                <div className="p-field col">
+                                <div className="p-field col-12 mt-4 sm:col-6 md:col-6 xl:col-6 lg:col-6">
                                     <span className="p-float-label p-input-icon-right">
                                         <Calendar  name="fechaNacimientoUsuario" yearRange={`${today.getFullYear()-90}:${today.getFullYear()-14}`} id="fechaNacimientoUsuario" value={formik.values.fechaNacimientoUsuario} onChange={formik.handleChange}  monthNavigator yearNavigator className={classNames({ 'p-invalid': isFormFieldValid('fechaNacimientoUsuario') })}
                                         readOnlyInput monthNavigatorTemplate={monthNavigatorTemplate} yearNavigatorTemplate={yearNavigatorTemplate}/>
@@ -492,7 +491,7 @@ const IndexUsu = () => {
                                     {getFormErrorMessage('fechaNacimientoUsuario')}
                                 </div>
                             }
-                            <div className="p-field col">
+                            <div className="p-field col-12 mt-4 sm:col-6 md:col-6 xl:col-6 lg:col-6">
                                 <span className="p-float-label p-input-icon-right">
                                     <SelectCiudad name="idCiudad_FK" value={formik.values.idCiudad_FK} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('idCiudad_FK') })} />
                                     <label htmlFor="idCiudad_FK" className={classNames({ 'p-error': isFormFieldValid('idCiudad_FK') })}>Ciudad Recidencia*</label>
@@ -501,23 +500,23 @@ const IndexUsu = () => {
                             </div>
                         </div>
                         {!formik.values.idUsuario &&
-                            <div>
-                                <label htmlFor="idTipoDocumento_FK" className={classNames({ 'p-error': isFormFieldValid('idTipoDocumento_FK') })}>Tipo Documento*</label>
+                            <div className="mt-2">
+                                <label htmlFor="idTipoDocumento_FK" className={"mb-2 "+classNames({ 'p-error': isFormFieldValid('idTipoDocumento_FK') })}>Tipo Documento*</label>
                                 <SelectTipoDocumento name="idTipoDocumento_FK" value={formik.values.idTipoDocumento_FK} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('idTipoDocumento_FK') })}/>
                                 {getFormErrorMessage('idTipoDocumento_FK')}
                             </div>
                         }
                         {!formik.values.idUsuario &&
-                            <div className="formgrid grid my-4">
-                                <div className="p-field col">
+                            <div className="formgrid grid ">
+                                <div className="p-field col-12 mt-4 sm:col-6 md:col-6 xl:col-6 lg:col-6">
                                     <span className="p-float-label p-input-icon-right">
                                         <i><FaAddressCard/></i>
-                                        <InputText id="numeroDocumento" name="numeroDocumento" value={formik.values.numeroDocumento} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('numeroDocumento') })} />
+                                        <InputText id="numeroDocumento" name="numeroDocumento" value={formik.values.numeroDocumento} onChange={formik.handleChange}  className={classNames({ 'p-invalid': isFormFieldValid('numeroDocumento') })} />
                                         <label htmlFor="numeroDocumento" className={classNames({ 'p-error': isFormFieldValid('numeroDocumento') })}>Numero De Documento*</label>
                                     </span>
                                     {getFormErrorMessage('numeroDocumento')}
                                 </div>
-                                <div className="p-field col">
+                                <div className="p-field col-12 mt-4 sm:col-6 md:col-6 xl:col-6 lg:col-6">
                                     <span className="p-float-label p-input-icon-right">
                                         <Calendar name="fechaExpedicionDoc" yearRange={`${today.getFullYear()-90}:${today.getFullYear()}`} id="fechaExpedicionDoc" value={formik.values.fechaExpedicionDoc} onChange={formik.handleChange}  monthNavigator yearNavigator className={classNames({ 'p-invalid': isFormFieldValid('fechaExpedicionDoc') })}
                                         readOnlyInput monthNavigatorTemplate={monthNavigatorTemplate} yearNavigatorTemplate={yearNavigatorTemplate}/>
@@ -529,7 +528,7 @@ const IndexUsu = () => {
                             </div>
                         }
                         {!formik.values.idUsuario &&
-                            <div className="p-field my-4">
+                            <div className="p-field mt-4">
                                 <span className="p-float-label p-input-icon-right">
                                     <i className="pi pi-envelope" />
                                     <SelectCiudad name="LugarExpedicionDoc" value={formik.values.LugarExpedicionDoc} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('LugarExpedicionDoc') })} />
