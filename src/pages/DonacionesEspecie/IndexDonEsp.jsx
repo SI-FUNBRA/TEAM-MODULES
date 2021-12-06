@@ -5,8 +5,11 @@ import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import { Toolbar } from 'primereact/toolbar';
 import { InputText } from 'primereact/inputtext';
-import { ServicioDonacionEconomica } from '../../service/ServicioDonacionEconomica';
-const IndexUsu = () => {
+import { Dialog } from 'primereact/dialog';
+import { SolicitudDonacionEspecie } from '../../service/ServicioDonEsp';
+
+
+const IndexDonEsp = () => {
 
     const [usuarios, setUsuarios] = useState(null);
     //editar o mostrar uno nomas
@@ -18,8 +21,13 @@ const IndexUsu = () => {
 
     //Obtener la data para llenar las tables
     useEffect(() => {
-        const servicioDonE = new ServicioDonacionEconomica();
-        servicioDonE.getDonacionesE().then(res => setUsuarios(res.data)).catch(()=>{});
+
+        const serviDonEsp = new SolicitudDonacionEspecie()
+        serviDonEsp.getDonacionesEsp().then(res=>{
+                setUsuarios(res.data)
+            });
+
+
     },[]);
 
 
@@ -61,8 +69,8 @@ const IndexUsu = () => {
     const apellidoBodyTemplate = (rowData) => {
         return (
             <>
-                <span className="p-column-title">Apellido</span>
-                {rowData.Usuario.apellidoUsuario}
+                <span className="p-column-title">Nombre</span>
+                {rowData.Usuario.nombreUsuario}
             </>
         );
     }
@@ -71,8 +79,8 @@ const IndexUsu = () => {
     const celularBodyTemplate = (rowData) => {
         return (
             <>
-                <span className="p-column-title">Celular</span>
-                {rowData.montoDonacion}
+                <span className="p-column-title">Apellido</span>
+                {rowData.Usuario.apellidoUsuario}
             </>
         );
     }
@@ -80,8 +88,8 @@ const IndexUsu = () => {
     const documentoBodyTemplate = (rowData) => {
         return (
             <>
-                <span className="p-column-title">Documento</span>
-                {rowData.metododepago.nombreMetodoPago}
+                <span className="p-column-title">Lugar Entrega</span>
+                {rowData.lugarEntrega}
             </>
         );
     }
@@ -89,10 +97,16 @@ const IndexUsu = () => {
     const barrioBodyTemplate = (rowData) => {
         return (
             <>
-                <span className="p-column-title">Ciudad</span>
-                {rowData.fechaDonacion}
+                <span className="p-column-title">Fecha Entrega</span>
+                {rowData.fechaEntrega}
             </>
         );
+    }
+
+    const buttonsTemplate = (rowData) =>{
+        return (
+            <Button icon="pi pi-eye" className="p-button-rounded p-button-info mr-2 mb-1" onClick={() => showDialog(rowData)} />
+        )
     }
 
     //Parte Superior de la tabla, donde está el search, parece que el search solo setea un estado que se define antes...
@@ -104,6 +118,22 @@ const IndexUsu = () => {
             </span>
         </div>
     );
+
+    const [dialog, setDialog] = useState(false)
+
+    const hideDialog = () =>{
+        setDialog(false)
+    }
+
+    const [defaulItem, setDefaulItem] = useState({
+        ArticuloDonados:[]
+    })
+
+    const showDialog = (data) =>{
+        setDefaulItem(data)
+        console.log(data);
+        setDialog(true)
+    }
 
     //aqui ya empieza el codigo normal :D
     return (
@@ -120,14 +150,27 @@ const IndexUsu = () => {
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="Registros {first} a {last} de un total de {totalRecords}"
                         globalFilter={globalFilter} emptyMessage="No se encontro ningun registro." header={header}>
-                        <Column field="nombreUsuario" header="Nombre" sortable body={nombreBodyTemplate}></Column>
-                        <Column field="apellidoUsuario" header="Apellido" sortable body={apellidoBodyTemplate}></Column>
-                        <Column field="telefonoCelular" header="Monto" body={celularBodyTemplate} sortable></Column>
-                        <Column field="numeroDocumento" header="Metodo De Pago" sortable body={documentoBodyTemplate}></Column>
-                        <Column field="Ciudad.nombreCiudad" header="Fecha Donación" body={barrioBodyTemplate} sortable></Column>
+                        <Column field="estadoSolicitud" header="Estado" sortable body={nombreBodyTemplate}></Column>
+                        <Column field="Usuario.nombreUsuario" header="Nombre" sortable body={apellidoBodyTemplate}></Column>
+                        <Column field="Usuario.apellidoUsuario" header="Apellido" body={celularBodyTemplate} sortable></Column>
+                        <Column field="lugarEntrega" header="Lugar Entrega" sortable body={documentoBodyTemplate}></Column>
+                        <Column field="fechaEntrega" header="Fecha Entrega" body={barrioBodyTemplate} sortable></Column>
+                        <Column header="Articulos Donados" body={buttonsTemplate}></Column>
                     </DataTable>
                     </div>
 
+
+                    <Dialog className="col-11 d-sm-4 md:col-6 xl:col-5" visible={dialog} header="Articulos De La Solicitud" modal onHide={hideDialog}>
+
+                        {
+                            defaulItem.ArticuloDonados.map((item, i)=>(
+                                    <div key={i} className="card">
+                                        <p><b>nombre: </b>{item.nombreArticuloDonado}</p>
+                                        <p><b>cantidad: </b>{item.cantidadArticuloDonado}</p>
+                                    </div>
+                                ))
+                        }
+                    </Dialog>
 
 
                 </div>
@@ -136,4 +179,4 @@ const IndexUsu = () => {
     )
 }
 
-export default IndexUsu
+export default IndexDonEsp

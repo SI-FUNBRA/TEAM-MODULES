@@ -120,11 +120,11 @@ const IndexUsu = () => {
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="Registros {first} a {last} de un total de {totalRecords}"
                         globalFilter={globalFilter} emptyMessage="No se encontro ningun registro." header={header}>
-                        <Column field="nombreUsuario" header="Nombre" sortable body={nombreBodyTemplate}></Column>
-                        <Column field="apellidoUsuario" header="Apellido" sortable body={apellidoBodyTemplate}></Column>
-                        <Column field="telefonoCelular" header="Monto" body={celularBodyTemplate} sortable></Column>
-                        <Column field="numeroDocumento" header="Metodo De Pago" sortable body={documentoBodyTemplate}></Column>
-                        <Column field="Ciudad.nombreCiudad" header="Fecha Donación" body={barrioBodyTemplate} sortable></Column>
+                        <Column field="Usuario.nombreUsuario" header="Nombre" sortable body={nombreBodyTemplate}></Column>
+                        <Column field="Usuario.apellidoUsuario" header="Apellido" sortable body={apellidoBodyTemplate}></Column>
+                        <Column field="montoDonacion" header="Monto" body={celularBodyTemplate} sortable></Column>
+                        <Column field="metododepago.nombreMetodoPago" header="Metodo De Pago" sortable body={documentoBodyTemplate}></Column>
+                        <Column field="fechaDonacion" header="Fecha Donación" body={barrioBodyTemplate} sortable></Column>
                     </DataTable>
                     </div>
 

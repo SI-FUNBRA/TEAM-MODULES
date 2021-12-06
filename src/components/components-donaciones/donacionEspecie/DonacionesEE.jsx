@@ -10,6 +10,7 @@ import {CgDanger} from 'react-icons/cg';
 
 import './stylesLocalStorage.css';
 import DataDonE from './DataDonE';
+import { ServicioUsu } from '../../../service/ServicioUsu';
 
 const Section=styled.section`
     span{
@@ -240,6 +241,7 @@ const DonacionesEE = () => {
     }
 
     const [dataSolDonEsp, setDataSolDonEsp]=useState({
+        idUsuario:'',
         estadoSolicitud:"",
         fechaEntrega:"",
         lugarEntrega:"",
@@ -269,6 +271,11 @@ const DonacionesEE = () => {
 
     useEffect(()=>{
         sessionStorage.setItem('dataSolDonEsp.ArticulosDonados', JSON.stringify(dataSolDonEsp.ArticulosDonados));
+        const serviUsu = new ServicioUsu()
+
+        serviUsu.getUsertopbar().then(res=>{
+            setDataSolDonEsp({...dataSolDonEsp, 'idUsuario':res.data.id})
+        })
     }, [dataSolDonEsp.ArticulosDonados]);
 
     //Eliminar un registro de dataa
@@ -294,7 +301,7 @@ const DonacionesEE = () => {
     //     setErrors(validateForm(cantidadArticuloDonado));
     // }
 
-    const URL='http://localhost:3005/api/solicitudDonacionEspecie';
+    const URL=`${process.env.REACT_APP_API_URL}/solicitudDonacionEspecie`;
 
     const handleSubmit=(e)=>{
         e.preventDefault();

@@ -16,7 +16,7 @@ const TipoArtSelectSection=styled.section`
 
 const TipoArtSelect = ({nameForm, valor, handChangeModal}) => {
 
-    const URL='http://localhost:3005/api/tipoArticuloDonado';
+    const URL=`${process.env.REACT_APP_API_URL}/tipoArticuloDonado`;
 
     const getData=async()=>{
         const response=await axios.get(URL);
